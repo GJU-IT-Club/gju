@@ -1,6 +1,8 @@
 ---
 import "@/styles/global.css";
 import MainHead from "./MainHead.astro";
+import Header from "@/components/common/Header.astro";
+import Sidebar from "@/components/common/Sidebar.astro";
 
 const { ...props } = Astro.props;
 ---
@@ -8,7 +10,54 @@ const { ...props } = Astro.props;
 <html lang="en">
   <MainHead {...props} />
 
-  <body class="">
-    <slot />
+  <body class="min-h-screen">
+    <Header />
+    <Sidebar />
+    <div
+      id="sidebar-overlay"
+      class="fixed inset-0 bg-black/50 z-30 hidden md:hidden"
+      aria-hidden="true"
+    >
+    </div>
+
+    <main class="md:pl-16 pt-16 min-h-screen">
+      <div class="container mx-auto p-4">
+        <slot />
+      </div>
+    </main>
   </body>
 </html>
+
+<script>
+  // Handle mobile sidebar on page transition
+  document.addEventListener("astro:after-swap", () => {
+    const sidebar = document.querySelector("aside");
+    const overlay = document.getElementById("sidebar-overlay");
+    const isMobile = window.innerWidth < 768;
+
+    // Keep sidebar hidden on mobile after page navigation
+    if (isMobile && sidebar) {
+      sidebar.classList.add("-translate-x-full");
+      overlay?.classList.add("hidden");
+    }
+  });
+
+  function setupOverlay() {
+    const overlay = document.getElementById("sidebar-overlay");
+    const sidebar = document.querySelector("aside");
+
+    if (overlay && sidebar) {
+      overlay.addEventListener("click", () => {
+        sidebar.classList.add("-translate-x-full");
+        overlay.classList.add("hidden");
+      });
+    }
+  }
+
+  document.addEventListener("astro:page-load", setupOverlay);
+
+  // Fallback for browsers without View Transitions API
+  if (!document.startViewTransition) {
+    document.addEventListener("DOMContentLoaded", setupOverlay);
+  }
+</script>

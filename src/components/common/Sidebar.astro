@@ -1,0 +1,74 @@
+---
+import Blog from "@/assets/blog.svg";
+import Home from "@/assets/home.svg";
+import Roadmap from "@/assets/roadmap.svg";
+import Kanban from "@/assets/kanban.svg";
+import Calc from "@/assets/calculator.svg";
+import Find from "@/assets/find.svg";
+import Logo from "@/assets/logo.svg";
+
+const navItems = [
+  { href: "/", label: "Home", icon: Home },
+  { href: "/plans", label: "Study Plans", icon: Roadmap },
+  { href: "/blog", label: "Blog", icon: Blog },
+  { href: "/search", label: "Search", icon: Find },
+  { href: "/gpa", label: "GPA Calculator", icon: Calc },
+  { href: "/schedules", label: "Manage Schecdules", icon: Kanban},
+];
+const bottomItems = [
+  { href: "/settings", label: "Settings", icon: "settings" },
+//   { href: "/about", label: "About", icon: "file" },
+//   { href: "/contact", label: "Contact", icon: "file" },
+//   { href: "/privacy", label: "Privacy Policy", icon: "file" },
+//   { href: "/terms", label: "Terms of Service", icon: "file" },
+  
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<aside class="h-screen w-16 flex flex-col fixed left-0 top-0 bottom-0 bg-sidebar text-sidebar-foreground border-r border-sidebar-border z-40 transition-transform duration-200 md:translate-x-0 -translate-x-full">
+  <div class="flex items-center justify-center h-16 border-b border-sidebar-border">
+    <a href="/" class="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-10 items-center justify-center rounded-lg">
+      <Logo class="size-5"/>
+    </a>
+  </div>
+  
+  <nav class="flex flex-col gap-2 p-2 flex-1">
+      {navItems.map((item) => (
+      <a 
+        href={item.href} 
+        class={`flex items-center justify-center h-10 w-10 rounded-md group relative ${
+          currentPath === item.href ? "bg-sidebar-accent text-sidebar-accent-foreground" : "hover:bg-sidebar-accent/50 text-sidebar-foreground"
+        }`}
+        aria-label={item.label}
+      >
+        <item.icon class="h-5 w-5"/>        
+        <!-- Tooltip -->
+        <span class="absolute left-full ml-2 px-2 py-1 bg-popover text-popover-foreground text-xs rounded-md opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all pointer-events-none whitespace-nowrap">
+          {item.label}
+        </span>
+      </a>
+    ))}
+  </nav>
+  <div class="flex items-center justify-center ">
+    <a 
+    href={bottomItems[0].href} 
+    class={`flex items-center justify-center h-10 w-10 rounded-md group relative ${
+      currentPath === bottomItems[0].href ? "bg-sidebar-accent text-sidebar-accent-foreground" : "hover:bg-sidebar-accent/50 text-sidebar-foreground"
+    }`}
+    aria-label={bottomItems[0].label}
+  >
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5">
+        <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+        <circle cx="12" cy="12" r="3"></circle>
+      </svg>
+    
+    
+    <!-- Tooltip -->
+    <span class="absolute left-full ml-2 px-2 py-1 bg-popover text-popover-foreground text-xs rounded-md opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all pointer-events-none whitespace-nowrap">
+      {bottomItems[0].label}
+    </span>
+  </a>
+  </div>
+</aside>

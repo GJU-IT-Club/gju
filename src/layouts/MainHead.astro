@@ -1,6 +1,6 @@
 ---
+import { ClientRouter } from "astro:transitions";
 import Seo from "@/components/seo/Seo.astro";
-
 // Pass the contents to create SEO for the page
 const { title, description, image, frontmatter, robots } = Astro.props;
 ---
@@ -16,8 +16,9 @@ const { title, description, image, frontmatter, robots } = Astro.props;
   <meta name="generator" content={Astro.generator} />
 
   <title>{title}</title>
-  <meta name="description" content={description} />
 
+  <meta name="description" content={description} />
+  <ClientRouter />
   <Seo
     {title}
     {description}

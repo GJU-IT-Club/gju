@@ -1,0 +1,59 @@
+---
+
+---
+
+<header class="h-16 fixed top-0 left-0 right-0 bg-background border-b border-border z-30 flex items-center px-4">
+  <div class="flex items-center justify-between w-full md:pl-16">
+    <div class="flex items-center">
+      <button 
+        id="sidebar-toggle"
+        class="md:hidden mr-2 h-10 w-10 flex items-center justify-center rounded-md hover:bg-accent transition-colors"
+        aria-label="Toggle sidebar"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6">
+          <line x1="4" x2="20" y1="12" y2="12"></line>
+          <line x1="4" x2="20" y1="6" y2="6"></line>
+          <line x1="4" x2="20" y1="18" y2="18"></line>
+        </svg>
+      </button>
+      
+      <a href="/" class="text-2xl font-semibold pl-1">gju.app</a>
+    </div>
+    
+    <!-- Right side of header  -->
+    <div class="flex items-center gap-2">
+      <!-- TODO: Add btns here -->
+       
+    </div>
+  </div>
+</header>
+
+<script>
+  function setupSidebarToggle() {
+    const sidebarToggle = document.getElementById('sidebar-toggle');
+    const sidebar = document.querySelector('aside');
+    const overlay = document.getElementById('sidebar-overlay');
+    
+    if (sidebarToggle && sidebar) {
+      sidebarToggle.addEventListener('click', () => {
+        sidebar.classList.toggle('-translate-x-full');
+        if (overlay) {
+          if (sidebar.classList.contains('-translate-x-full')) {
+            overlay.classList.add('hidden');
+          } else {
+            overlay.classList.remove('hidden');
+          }
+        }
+        document.body.classList.toggle('sidebar-open');
+      });
+    }
+  }
+
+  // View Trans handle
+  document.addEventListener('astro:page-load', setupSidebarToggle);
+  
+  // Fallback 
+  if (!document.startViewTransition) {
+    document.addEventListener('DOMContentLoaded', setupSidebarToggle);
+  }
+</script>
