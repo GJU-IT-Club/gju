@@ -1,4 +1,6 @@
 # [gju.app](https://gju.app)
+> [!CAUTION]
+> Project is Under Development and not ready now
 
 ```sh
 git clone https://github.com/GJU-IT-Club/gju.git
