@@ -52,12 +52,13 @@ Inside of your Astro project, you'll see the following folders and files:
 
 ├── public/             # Static assets (fonts, images, etc.)
 └───src
+    ├───assets/         # Assets that'll be used inside in the App (SVGs, Images)
     ├───components/     # UI components
     │   ├───common      # Shared components
     │   ├───features    # Feature-specific components
     │   ├───seo         # SEO-specific components
     │   └───ui          # Shadcn installed components (no need to edit)
-    ├───content         # Static Content goes here (course data, blogs)
+    ├───content         # Static Content goes here (course data, professors, blogs)
     ├───data            # Data (siteData, etc.)
     ├───hooks           # React hooks
     ├───layouts         # Page layouts
