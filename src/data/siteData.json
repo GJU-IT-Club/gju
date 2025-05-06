@@ -1,0 +1,8 @@
+{
+  "title": "gju.app",
+  "description": "gju.app is a web application that provides a modern platform for GJU students to manage their academic life, including courses, and communication with faculty.",
+  "image": {
+    "src": "https://github.com/GJU-IT-Club/gju/raw/main/public/cover.png",
+    "alt": "gju.app"
+  }
+}

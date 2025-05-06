@@ -1,4 +1,14 @@
 ---
-import '@/styles/global.css';
+import "@/styles/global.css";
+import MainHead from "./MainHead.astro";
+
+const { ...props } = Astro.props;
 ---
 
+<html lang="en">
+  <MainHead {...props} />
+
+  <body class="">
+    <slot />
+  </body>
+</html>
