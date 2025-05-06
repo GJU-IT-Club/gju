@@ -1,5 +1,5 @@
 import siteData from "../data/siteData.json";
-import { slugify } from "./slugify";
+import { slugify } from "./slugify.js";
 
 export default function jsonLDGenerator({ type, post, url }) {
   // If the page has CMS data, use it.
