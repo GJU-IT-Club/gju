@@ -1,19 +1,26 @@
+
+<div align="center">
+    <a href="https://gju.app"><h1>gju.app</h1></a>
+    <img src="./public/cover.png" alt="Cover" width="600" />
+</div>
+
+## Installation
+
 > [!CAUTION]
 > Project is Under Development and not ready now
 
 
-<div align="center">
-    <a href="https://gju.app"><h1>gju.app</h1></a>
-    <img src="https://raw.githubusercontent.com/GJU-IT-Club/gju/main/public/cover.png" alt="Cover"/>
-</div>
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/GJU-IT-Club/gju)
+[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/GJU-IT-Club/gju)
+
+
 ```sh
 git clone https://github.com/GJU-IT-Club/gju.git
 cd gju  # Navigates Directory to gju/
 npm i   # install dependencies (requires node) 
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/GJU-IT-Club/gju)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/GJU-IT-Club/gju)
+---
 
 ## 👾 Techstack
 

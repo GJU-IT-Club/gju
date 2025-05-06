@@ -1,4 +1,9 @@
 {
-  "recommendations": ["astro-build.astro-vscode"],
+  "recommendations": [
+    "astro-build.astro-vscode",
+    "bradlc.vscode-tailwindcss",
+    "dsznajder.es7-react-js-snippets",
+    "usernamehw.errorlens"
+  ],
   "unwantedRecommendations": []
 }
