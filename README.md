@@ -1,21 +1,28 @@
-# [gju.app](https://gju.app)
 > [!CAUTION]
 > Project is Under Development and not ready now
 
+
+<div align="center">
+    <a href="https://gju.app"><h1>gju.app</h1></a>
+    <img src="https://raw.githubusercontent.com/GJU-IT-Club/gju/main/public/cover.png" alt="Cover"/>
+</div>
 ```sh
 git clone https://github.com/GJU-IT-Club/gju.git
+cd gju  # Navigates Directory to gju/
+npm i   # install dependencies (requires node) 
 ```
 
 [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/GJU-IT-Club/gju)
 [![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/GJU-IT-Club/gju)
 
-
 ## 👾 Techstack
+
 - Astro & React
 - Tailwind & Shadcn
 - Typescript
 
 ## 🌿 Branches
+
 Our project uses the following branch structure:
 
 - `main`: Production-ready code. This branch is deployed to the live environment and should remain stable at all times.
@@ -28,8 +35,6 @@ Our project uses the following branch structure:
 2. Implement your feature or fix in your development branch
 3. Open a pull request to merge your changes into the `test` branch
 4. After testing and review in the `test` environment, changes are merged into `main`
-
-
 
 ## 🚀 Project Structure
 
@@ -51,7 +56,7 @@ Inside of your Astro project, you'll see the following folders and files:
     ├───layouts         # Page layouts
     ├───lib             # code logic goes here
     ├───stores          # State Management
-    ├───styles          
+    ├───styles
     └───utils           # Helper functions
 │   └── pages/
 │       └── index.astro     # index page at https://gju.app/
