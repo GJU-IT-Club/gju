@@ -27,6 +27,7 @@ npm i   # install dependencies (requires node)
 - Astro & React
 - Tailwind & Shadcn
 - Typescript
+- [Phosphor Icons](https://phosphoricons.com/)
 
 ## 🌿 Branches
 

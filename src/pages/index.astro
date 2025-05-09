@@ -1,8 +1,12 @@
 ---
 import MainLayout from "@/layouts/MainLayout.astro";
+const props = {
+  title: "gju.app",
+  description: "gju.app home page",
+};
 ---
 
-<MainLayout title="Astro Page" description="A simple Astro page example">
+<MainLayout {...props}>
   <main class="min-h-screen flex flex-col items-center justify-center p-4">
     <h1 class="text-2xl font-medium">
       Welcome to <span
