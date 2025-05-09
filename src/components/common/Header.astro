@@ -40,32 +40,32 @@
   </div>
 </header>
 
-<!-- <script>
+<script>
   function setupSidebarToggle() {
-    const sidebarToggle = document.getElementById('sidebar-toggle');
-    const sidebar = document.querySelector('aside');
-    const overlay = document.getElementById('sidebar-overlay');
-    
+    const sidebarToggle = document.getElementById("sidebar-toggle");
+    const sidebar = document.querySelector("aside");
+    const overlay = document.getElementById("sidebar-overlay");
+
     if (sidebarToggle && sidebar) {
-      sidebarToggle.addEventListener('click', () => {
-        sidebar.classList.toggle('-translate-x-full');
+      sidebarToggle.addEventListener("click", () => {
+        sidebar.classList.toggle("-translate-x-full");
         if (overlay) {
-          if (sidebar.classList.contains('-translate-x-full')) {
-            overlay.classList.add('hidden');
+          if (sidebar.classList.contains("-translate-x-full")) {
+            overlay.classList.add("hidden");
           } else {
-            overlay.classList.remove('hidden');
+            overlay.classList.remove("hidden");
           }
         }
-        document.body.classList.toggle('sidebar-open');
+        document.body.classList.toggle("sidebar-open");
       });
     }
   }
 
   // View Trans handle
-  document.addEventListener('astro:page-load', setupSidebarToggle);
-  
-  // Fallback 
+  document.addEventListener("astro:page-load", setupSidebarToggle);
+
+  // Fallback
   if (!document.startViewTransition) {
-    document.addEventListener('DOMContentLoaded', setupSidebarToggle);
+    document.addEventListener("DOMContentLoaded", setupSidebarToggle);
   }
-</script> -->
+</script>
