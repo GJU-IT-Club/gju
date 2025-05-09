@@ -11,7 +11,7 @@ const { ...props } = Astro.props;
   <MainHead {...props} />
 
   <body class="min-h-screen">
-    <!-- <Header /> -->
+    <Header />
     <Sidebar />
     <div
       id="sidebar-overlay"
@@ -20,7 +20,7 @@ const { ...props } = Astro.props;
     >
     </div>
 
-    <div class="min-h-screen">
+    <div class="min-h-screen md:ml-16">
       <slot />
     </div>
   </body>
