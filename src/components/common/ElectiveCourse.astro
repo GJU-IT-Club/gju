@@ -1,0 +1,173 @@
+---
+// components/ElectiveCourse.astro
+const { id = "ELECTIVE", title = "Program Elective" } = Astro.props;
+---
+
+<div class="elective-course relative w-full min-h-[112px] bg-gray-50 rounded-lg border border-gray-200 hover:border-blue-300 transition-all duration-200 group">
+  <!-- Selected Elective Display -->
+  <div class="selected-electives p-3">
+    <div class="flex justify-between items-start">
+      <div>
+        <h3 class="font-bold text-sm text-purple-800">{title}</h3>
+        <div class="selected-course-display mt-2 min-h-[40px]">
+          <p class="text-xs italic text-gray-500 text-center py-3">Select an elective</p>
+        </div>
+      </div>
+      
+      <!-- Dropdown Toggle -->
+      <button class="dropdown-toggle flex items-center justify-center h-6 w-6 rounded-full bg-purple-100 hover:bg-purple-200 text-purple-700 transition-colors duration-200">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Elective Dropdown -->
+  <div class="elective-dropdown absolute hidden z-10 w-full mt-1 bg-white rounded-lg shadow-lg border border-gray-200 overflow-hidden max-h-60 overflow-y-auto">
+    <div class="p-2 border-b border-gray-100 bg-gray-50">
+      <div class="relative">
+        <input 
+          type="text" 
+          placeholder="Search electives..." 
+          class="search-electives w-full pl-8 pr-3 py-1 text-xs border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-purple-500"
+        >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 absolute left-2 top-2 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+      </div>
+    </div>
+    
+    <div class="elective-options divide-y divide-gray-100">
+      <!-- Clear Selection Option -->
+      <div 
+        class="elective-option p-2 hover:bg-purple-50 cursor-pointer transition-colors duration-100"
+        data-action="clear"
+      >
+        <p class="text-xs text-purple-600 font-medium">Clear selection</p>
+      </div>
+      
+      <!-- Electives will be populated here by JavaScript -->
+    </div>
+  </div>
+
+  <script>
+    // Sample electives data - in a real app this would come from props or API
+    const electives = [
+      { code: "CS333", name: "Game Programming", credits: 3 },
+      { code: "CS357", name: "Cybersecurity", credits: 3 },
+      { code: "CS358", name: "Multimedia Systems Design", credits: 3 },
+      { code: "CS359", name: "Internet of Things", credits: 3 },
+      { code: "CS364", name: "Information Retrieval", credits: 3 },
+      { code: "CS430", name: "Virtual and Augmented Reality", credits: 3 }
+    ];
+
+    // Initialize component
+    document.addEventListener('DOMContentLoaded', () => {
+      const container = document.currentScript.closest('.elective-course');
+      const dropdown = container.querySelector('.elective-dropdown');
+      const toggle = container.querySelector('.dropdown-toggle');
+      const display = container.querySelector('.selected-course-display');
+      const optionsContainer = container.querySelector('.elective-options');
+      const searchInput = container.querySelector('.search-electives');
+      
+      // Populate elective options
+      electives.forEach(elective => {
+        const option = document.createElement('div');
+        option.className = 'elective-option p-2 hover:bg-purple-50 cursor-pointer transition-colors duration-100';
+        option.innerHTML = `
+          <div class="flex justify-between items-center">
+            <div>
+              <p class="text-xs font-semibold text-purple-800">${elective.code}</p>
+              <p class="text-xs text-gray-600">${elective.name}</p>
+            </div>
+            <span class="text-xs text-gray-500">${elective.credits} Cr</span>
+          </div>
+        `;
+        option.dataset.code = elective.code;
+        option.dataset.name = elective.name;
+        option.dataset.credits = String(elective.credits);
+        optionsContainer.appendChild(option);
+      });
+
+      // Toggle dropdown
+      toggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        dropdown.classList.toggle('hidden');
+      });
+
+      // Handle elective selection
+      optionsContainer.addEventListener('click', (e) => {
+        const option = (e.target as Element).closest('.elective-option') as HTMLElement;
+        if (!option) return;
+        
+        if (option.dataset.action === 'clear') {
+          display.innerHTML = '<p class="text-xs italic text-gray-500 text-center py-3">Select an elective</p>';
+        } else {
+          display.innerHTML = `
+            <div class="bg-purple-50 rounded p-2">
+              <p class="text-xs font-semibold text-purple-800">${option.dataset.code}</p>
+              <p class="text-xs text-gray-700">${(option as HTMLElement).dataset.name}</p>
+              <p class="text-xs text-gray-500 mt-1">${option.dataset.credits} Credit Hours</p>
+            </div>
+          `;
+        }
+        
+        dropdown.classList.add('hidden');
+      });
+
+      // Search functionality
+      searchInput.addEventListener('input', (e) => {
+        const searchTerm = e.target.value.toLowerCase();
+        const options = optionsContainer.querySelectorAll('.elective-option:not([data-action="clear"])');
+        
+        options.forEach(option => {
+          const code = option.dataset.code.toLowerCase();
+          const name = option.dataset.name.toLowerCase();
+          if (code.includes(searchTerm) || name.includes(searchTerm)) {
+            option.style.display = 'block';
+          } else {
+            option.style.display = 'none';
+          }
+        });
+      });
+
+      // Close dropdown when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!container.contains(e.target)) {
+          dropdown.classList.add('hidden');
+        }
+      });
+    });
+  </script>
+
+  <style>
+    .elective-course {
+      min-width: 180px;
+    }
+    
+    .elective-dropdown {
+      scrollbar-width: thin;
+      scrollbar-color: #C7D2FE #EDE9FE;
+    }
+    
+    .elective-dropdown::-webkit-scrollbar {
+      width: 6px;
+    }
+    
+    .elective-dropdown::-webkit-scrollbar-track {
+      background: #EDE9FE;
+    }
+    
+    .elective-dropdown::-webkit-scrollbar-thumb {
+      background-color: #C7D2FE;
+      border-radius: 3px;
+    }
+    
+    @media (max-width: 768px) {
+      .elective-course {
+        min-width: 160px;
+      }
+    }
+  </style>
+</div>

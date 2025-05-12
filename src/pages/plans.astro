@@ -1,23 +1,478 @@
 ---
+import CourseCard from "@/components/common/CourseCard.astro";
+import ElectiveCourse from "@/components/common/ElectiveCourse.astro";
 import MainLayout from "@/layouts/MainLayout.astro";
 const currentPath = Astro.url.pathname;
 ---
 
 <MainLayout title="Settings" description="gju.app settings page">
-  <main class="min-h-screen flex flex-col items-center justify-center p-4">
-    <h1 class="text-2xl font-medium">
-      Welcome to <span
-        class="font-bold bg-gradient-to-r from-blue-600 via-yellow-500 to-amber-400 text-transparent bg-clip-text"
-        >{currentPath}</span
-      >!
-    </h1>
-    <p>
-      This is a simple example of an Astro page. You can use this template to
-      get started with your own project.
-    </p>
-    <p>
-      To learn more about Astro, check out the
-      <a href="https://docs.astro.build">Astro documentation</a>.
-    </p>
+  <main class="min-h-screen bg-white flex flex-col items-center p-4 font-sans">
+    <div class="container max-w-7xl mx-auto">
+      <h1 class="text-2xl md:text-3xl font-bold text-center mb-6 text-gray-800">
+        B.Sc. Computer Science Flowsheet 2023/2024
+      </h1>
+
+      <div class="flex gap-1 overflow-x-auto pb-4">
+        <!-- First Year -->
+        <div class="flex flex-col">
+          <div class="bg-blue-600 text-white text-center py-2 px-4 font-medium">
+            First Year
+          </div>
+          <div class="flex gap-1">
+            <!-- Semester 1 -->
+            <div class="flex flex-col">
+              <div
+                class="bg-blue-700 text-white text-center py-2 px-4 font-medium"
+              >
+                Sem. 1
+              </div>
+              <div class="flex flex-col gap-1">
+                <CourseCard
+                  id="ENGL1001"
+                  name="Upper-Intermediate English"
+                  credits="3"
+                />
+                <CourseCard
+                  id="GERL101B1"
+                  name="German I - B1 Track"
+                  credits="3"
+                />
+                <CourseCard
+                  id="CS116"
+                  name="Computing Fundamentals"
+                  credits="3"
+                />
+                <CourseCard
+                  id="CS1160"
+                  name="Computing Fundamentals Lab"
+                  credits="1"
+                />
+                <CourseCard id="ARB100" name="Arabic 100" credits="3" />
+                <CourseCard id="MATH101" name="Calculus I" credits="3" />
+              </div>
+            </div>
+
+            <!-- Semester 2 -->
+            <div class="flex flex-col">
+              <div
+                class="bg-blue-700 text-white text-center py-2 px-4 font-medium"
+              >
+                Sem. 2
+              </div>
+              <div class="flex flex-col gap-1">
+                <CourseCard
+                  id="GERL102B1"
+                  name="German II - B1 Track"
+                  credits="3"
+                />
+                <CourseCard id="NE101" name="National Education" credits="3" />
+                <CourseCard id="MATH102" name="Calculus II" credits="3" />
+                <CourseCard
+                  id="CS117"
+                  name="Object-Oriented Programming"
+                  credits="3"
+                />
+                <CourseCard
+                  id="CS1170"
+                  name="Object-Oriented Programming Lab"
+                  credits="1"
+                />
+                <CourseCard id="CS201" name="Discrete Structures" credits="3" />
+                <CourseCard id="CE212" name="Digital Systems" credits="3" />
+                <CourseCard
+                  id="CE2120"
+                  name="Digital Systems Lab"
+                  credits="1"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Second Year -->
+        <div class="flex flex-col">
+          <div class="bg-blue-600 text-white text-center py-2 px-4 font-medium">
+            Second Year
+          </div>
+          <div class="flex gap-1">
+            <!-- Semester 1 -->
+            <div class="flex flex-col">
+              <div
+                class="bg-blue-700 text-white text-center py-2 px-4 font-medium"
+              >
+                Sem. 1
+              </div>
+              <div class="flex flex-col gap-1">
+                <CourseCard
+                  id="GERL201B1"
+                  name="German III - B1 Track"
+                  credits="3"
+                />
+                <CourseCard
+                  id="CE201"
+                  name="Computer Architecture"
+                  credits="3"
+                />
+                <CourseCard
+                  id="CS222"
+                  name="Theory of Algorithms"
+                  credits="3"
+                />
+                <CourseCard id="CS223" name="Data Structures" credits="3" />
+                <CourseCard id="CS263" name="Database Management" credits="3" />
+                <CourseCard id="EE317" name="Linear Algebra" credits="3" />
+              </div>
+            </div>
+
+            <!-- Semester 2 -->
+            <div class="flex flex-col">
+              <div
+                class="bg-blue-700 text-white text-center py-2 px-4 font-medium"
+              >
+                Sem. 2
+              </div>
+              <div class="flex flex-col gap-1">
+                <CourseCard
+                  id="GERL202B1"
+                  name="German IV - B1 Track"
+                  credits="3"
+                />
+                <CourseCard id="MILS100" name="Military Science" credits="3" />
+                <CourseCard
+                  id="IE0121"
+                  name="Probability & Statistics"
+                  credits="3"
+                />
+                <CourseCard id="CS264" name="Visual Programming" credits="3" />
+                <CourseCard
+                  id="CS342"
+                  name="Software Engineering"
+                  credits="3"
+                />
+                <CourseCard id="CS355" name="Web Technologies" credits="3" />
+                <CourseCard
+                  id="CS451"
+                  name="Artificial Intelligence"
+                  credits="3"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Third Year -->
+        <div class="flex flex-col">
+          <div class="bg-blue-600 text-white text-center py-2 px-4 font-medium">
+            Third Year
+          </div>
+          <div class="flex gap-1">
+            <!-- Semester 1 -->
+            <div class="flex flex-col">
+              <div
+                class="bg-blue-700 text-white text-center py-2 px-4 font-medium"
+              >
+                Sem. 1
+              </div>
+              <div class="flex flex-col gap-1">
+                <CourseCard
+                  id="GERL301B1"
+                  name="German V - B1 Track"
+                  credits="3"
+                />
+                <CourseCard
+                  id="CS323"
+                  name="Computational Theory"
+                  credits="3"
+                />
+                <CourseCard id="CS332" name="Computer Graphics" credits="3" />
+                <CourseCard id="CE352" name="Computer Networks" credits="3" />
+                <CourseCard id="CE357" name="Operating Systems" credits="3" />
+                <CourseCard
+                  id="CE3570"
+                  name="Operating Systems Lab"
+                  credits="1"
+                />
+                <CourseCard
+                  id="CS419"
+                  name="Compiler Construction"
+                  credits="3"
+                />
+              </div>
+            </div>
+
+            <!-- Semester 2 -->
+            <div class="flex flex-col">
+              <div
+                class="bg-blue-700 text-white text-center py-2 px-4 font-medium"
+              >
+                Sem. 2
+              </div>
+              <div class="flex flex-col gap-1">
+                <CourseCard
+                  id="GERL302B1"
+                  name="German VI - B1 Track"
+                  credits="3"
+                />
+                <CourseCard id="ENGL1002" name="Advanced English" credits="3" />
+                <CourseCard id="CS330" name="Image Understanding" credits="3" />
+                <CourseCard
+                  id="CS356"
+                  name="Information Security"
+                  credits="3"
+                />
+                <CourseCard id="CS391" name="Field Training" credits="0" />
+                <CourseCard id="CS416" name="Systems Programming" credits="3" />
+                <CourseCard id="CS477" name="Mobile Computing" credits="3" />
+                <CourseCard id="CS492" name="Senior Project" credits="3" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- German Year -->
+        <div class="flex flex-col">
+          <div class="bg-blue-600 text-white text-center py-2 px-4 font-medium">
+            German Year
+          </div>
+          <div class="flex gap-1">
+            <!-- Semester 1 -->
+            <div class="flex flex-col">
+              <div
+                class="bg-blue-700 text-white text-center py-2 px-4 font-medium"
+              >
+                Sem. 1
+              </div>
+              <div class="flex flex-col gap-1">
+                <ElectiveCourse />
+                <ElectiveCourse />
+                <ElectiveCourse />
+                <ElectiveCourse />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </main>
 </MainLayout>
+
+<!-- Course Card Component -->
+<script>
+  // Define course data
+  const courses = [
+    { id: "ENGL1001", name: "Upper-Intermediate English", creditHours: 3 },
+    { id: "GERL101B1", name: "German I - B1 Track", creditHours: 3 },
+    { id: "CS116", name: "Computing Fundamentals", creditHours: 3 },
+    { id: "CS1160", name: "Computing Fundamentals Lab", creditHours: 1 },
+    { id: "ARB100", name: "Arabic 100", creditHours: 3 },
+    { id: "MATH101", name: "Calculus I", creditHours: 3 },
+    { id: "GERL102B1", name: "German II - B1 Track", creditHours: 3 },
+    { id: "NE101", name: "National Education", creditHours: 3 },
+    { id: "MATH102", name: "Calculus II", creditHours: 3 },
+    { id: "CS117", name: "Object-Oriented Programming", creditHours: 3 },
+    { id: "CS1170", name: "Object-Oriented Programming Lab", creditHours: 1 },
+    { id: "CS201", name: "Discrete Structures", creditHours: 3 },
+    { id: "CE212", name: "Digital Systems", creditHours: 3 },
+    { id: "CE2120", name: "Digital Systems Lab", creditHours: 1 },
+    { id: "GERL201B1", name: "German III - B1 Track", creditHours: 3 },
+    {
+      id: "CE201",
+      name: "Computer Architecture and Organization",
+      creditHours: 3,
+    },
+    { id: "CS222", name: "Theory of Algorithms", creditHours: 3 },
+    { id: "CS223", name: "Data Structures", creditHours: 3 },
+    { id: "CS263", name: "Database Management Systems", creditHours: 3 },
+    { id: "EE317", name: "Linear Algebra", creditHours: 3 },
+    { id: "GERL202B1", name: "German IV - B1 Track", creditHours: 3 },
+    { id: "MILS100", name: "Military Science", creditHours: 3 },
+    { id: "IE0121", name: "Probability and Statistics", creditHours: 3 },
+    { id: "CS264", name: "Visual Programming", creditHours: 3 },
+    { id: "CS342", name: "Software Engineering", creditHours: 3 },
+    { id: "CS355", name: "Web Technologies", creditHours: 3 },
+    { id: "CS451", name: "Artificial Intelligence", creditHours: 3 },
+    { id: "GERL301B1", name: "German V - B1 Track", creditHours: 3 },
+    { id: "CS323", name: "Computational Theory", creditHours: 3 },
+    { id: "CS332", name: "Computer Graphics", creditHours: 3 },
+    { id: "CE352", name: "Computer Networks", creditHours: 3 },
+    { id: "CE357", name: "Operating Systems", creditHours: 3 },
+    { id: "CE3570", name: "Operating Systems Lab", creditHours: 1 },
+    { id: "CS419", name: "Compiler Construction", creditHours: 3 },
+    { id: "GERL302B1", name: "German VI - B1 Track", creditHours: 3 },
+    { id: "ENGL1002", name: "Advanced English", creditHours: 3 },
+    { id: "CS330", name: "Image Understanding", creditHours: 3 },
+    { id: "CS356", name: "Information Security", creditHours: 3 },
+    { id: "CS391", name: "Field Training (160 hours)", creditHours: 0 },
+    { id: "CS416", name: "Systems Programming", creditHours: 3 },
+    { id: "CS477", name: "Mobile Computing", creditHours: 3 },
+    { id: "CS492", name: "Senior Project", creditHours: 3 },
+  ];
+
+  // Define electives
+  const generalTrackElectives = [
+    { id: "CS333", name: "Game Programming", creditHours: 3 },
+    { id: "CS357", name: "Cybersecurity", creditHours: 3 },
+    { id: "CS358", name: "Multimedia Systems Design", creditHours: 3 },
+    { id: "CS359", name: "Internet of Things", creditHours: 3 },
+    { id: "CS364", name: "Information Retrieval", creditHours: 3 },
+    { id: "CS365", name: "Systems Analysis and Design", creditHours: 3 },
+    { id: "CS371", name: "Bioinformatics", creditHours: 3 },
+    { id: "CS430", name: "Virtual and Augmented Reality", creditHours: 3 },
+    { id: "CS432", name: "Scientific Visualization", creditHours: 3 },
+    { id: "CS439", name: "Computer Animation", creditHours: 3 },
+    { id: "CS450", name: "Operations Optimization", creditHours: 3 },
+    {
+      id: "CS457",
+      name: "Decision Support Systems and Intelligent Systems",
+      creditHours: 3,
+    },
+    { id: "CS458", name: "Wireless Networks", creditHours: 3 },
+    { id: "CS460", name: "Data Mining", creditHours: 3 },
+    { id: "CS462", name: "Database Design", creditHours: 3 },
+    {
+      id: "CS481",
+      name: "Special Topics in Computer Graphics",
+      creditHours: 3,
+    },
+    {
+      id: "CS482",
+      name: "Special Topics in Software Engineering",
+      creditHours: 3,
+    },
+    {
+      id: "CS484",
+      name: "Special Topics in Database Technologies",
+      creditHours: 3,
+    },
+    { id: "CS489", name: "Special Topics in Algorithms", creditHours: 3 },
+    { id: "CS4512", name: "Natural Language Processing", creditHours: 3 },
+    { id: "CS4811", name: "Special Topics in Data Science", creditHours: 3 },
+    {
+      id: "CS4831",
+      name: "Special Topics in Applied Computer Science",
+      creditHours: 1,
+    },
+    {
+      id: "CS4832",
+      name: "Special Topics in Applied Computer Science",
+      creditHours: 2,
+    },
+    {
+      id: "CS4833",
+      name: "Special Topics in Applied Computer Science",
+      creditHours: 3,
+    },
+  ];
+
+  // Course card component
+  class CourseCard extends HTMLElement {
+    constructor() {
+      super();
+      const id = this.getAttribute("id");
+      const name = this.getAttribute("name");
+      const credits = this.getAttribute("credits");
+
+      this.innerHTML = `
+        <div class="w-36 h-28 bg-gray-200 p-2 relative hover:bg-blue-100 transition-colors duration-200">
+          <div class="absolute top-1 right-1 opacity-0 hover:opacity-100 text-blue-600 cursor-pointer">
+            <i class="fas fa-info-circle"></i>
+          </div>
+          <p class="font-bold text-sm">${id}</p>
+          <p class="text-xs line-clamp-2">${name}</p>
+          <p class="absolute bottom-1 right-1 text-xs text-gray-500">${credits} Cr Hr</p>
+        </div>
+      `;
+    }
+  }
+
+  customElements.define("course-card", CourseCard);
+
+  // Elective course component
+  class ElectiveCourse extends HTMLElement {
+    constructor() {
+      super();
+
+      this.innerHTML = `
+        <div class="w-36 h-28 bg-gray-200 p-2 relative hover:bg-blue-100 transition-colors duration-200">
+          <div class="absolute top-1 right-1 opacity-0 hover:opacity-100 text-blue-600 cursor-pointer">
+            <i class="fas fa-info-circle"></i>
+          </div>
+          <div class="dropdown relative">
+            <button class="flex items-center justify-between w-full bg-purple-600 hover:bg-purple-700 text-white px-2 py-1 rounded text-xs">
+              <span>Select Elective</span>
+              <i class="fas fa-chevron-up ml-1"></i>
+            </button>
+            <div class="dropdown-content hidden absolute right-0 mt-1 w-64 bg-white shadow-lg rounded-md z-10 max-h-60 overflow-y-auto">
+              <div class="p-2 hover:bg-blue-600 hover:text-white cursor-pointer rounded">Select Program Elective</div>
+              ${generalTrackElectives
+                .map(
+                  (elective) => `
+                <div class="p-2 hover:bg-blue-600 hover:text-white cursor-pointer rounded flex justify-between items-center">
+                  <div>
+                    <p class="font-bold text-xs">${elective.id}</p>
+                    <p class="text-xs">${elective.name}</p>
+                  </div>
+                  <span class="text-xs opacity-50">${elective.creditHours} Cr Hr</span>
+                </div>
+              `
+                )
+                .join("")}
+            </div>
+          </div>
+          <p class="text-xs italic text-center mt-6 text-gray-500">Select Program Elective</p>
+        </div>
+      `;
+
+      // Add dropdown functionality
+      this.querySelector("button").addEventListener("click", () => {
+        const dropdown = this.querySelector(".dropdown-content");
+        dropdown.classList.toggle("hidden");
+      });
+
+      // Handle elective selection
+      this.querySelectorAll(".dropdown-content div").forEach((option) => {
+        option.addEventListener("click", (e) => {
+          const electiveId = (e.currentTarget as Element).querySelector(
+            ".font-bold"
+          )?.textContent;
+          if (electiveId) {
+            const elective = generalTrackElectives.find(
+              (e) => e.id === electiveId
+            );
+            if (elective) {
+              this.querySelector("button").innerHTML = `
+                <span class="font-bold">${elective.id}</span>
+                <i class="fas fa-chevron-up ml-1"></i>
+              `;
+              this.querySelector(".text-center").innerHTML = `
+                <p class="text-xs">${elective.name}</p>
+                <p class="text-xs text-gray-500">${elective.creditHours} Cr Hr</p>
+              `;
+            }
+          } else {
+            // Clear selection
+            this.querySelector("button").innerHTML = `
+              <span>Select Elective</span>
+              <i class="fas fa-chevron-up ml-1"></i>
+            `;
+            this.querySelector(".text-center").innerHTML = `
+              <p class="text-xs italic text-gray-500">Select Program Elective</p>
+            `;
+          }
+          this.querySelector(".dropdown-content").classList.add("hidden");
+        });
+      });
+    }
+  }
+
+  customElements.define("elective-course", ElectiveCourse);
+
+  // Close dropdowns when clicking outside
+  document.addEventListener("click", (e) => {
+    if (!(e.target as Element).closest(".dropdown")) {
+      document.querySelectorAll(".dropdown-content").forEach((dropdown) => {
+        dropdown.classList.add("hidden");
+      });
+    }
+  });
+</script>

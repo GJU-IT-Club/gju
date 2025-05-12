@@ -1,0 +1,120 @@
+---
+// components/CourseCard.astro
+const { id, name, credits = 3, isElective = false } = Astro.props;
+---
+
+<div class="course-card group relative w-full h-28 bg-gray-100 rounded-lg p-2 transition-all duration-200 hover:shadow-md hover:bg-blue-50 border border-gray-200 hover:border-blue-200">
+  <!-- Course Code & Name -->
+  <div class="flex flex-col h-full">
+    <div class="flex justify-between items-start">
+      <span class="font-bold text-sm text-blue-800">{id}</span>
+      
+      <!-- Info Button -->
+      <button 
+        class="info-btn opacity-0 group-hover:opacity-100 text-blue-500 hover:text-blue-700 transition-opacity duration-200"
+        aria-label="Course information"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      </button>
+    </div>
+    
+    <!-- Course Title -->
+    <p class="text-xs text-gray-700 mt-1 line-clamp-2 flex-grow">{name}</p>
+    
+    <!-- Credit Hours -->
+    <div class="flex justify-between items-end mt-auto">
+      <span class="text-xs text-gray-500">{credits} Cr Hr</span>
+      
+      <!-- Prerequisite Indicator -->
+      {isElective ? (
+        <span class="text-xs px-2 py-0.5 rounded-full bg-purple-100 text-purple-800">Elective</span>
+      ) : (
+        <span class="text-xs px-2 py-0.5 rounded-full bg-blue-100 text-blue-800">Core</span>
+      )}
+    </div>
+  </div>
+
+  <!-- Hover Effects for Prerequisites -->
+  <div class="absolute inset-0 border-2 border-transparent group-hover:border-blue-300 rounded-lg pointer-events-none transition-all duration-200"></div>
+
+  <!-- Modal (hidden by default) -->
+  <div class="course-modal absolute hidden z-50 top-full left-0 mt-1 w-64 bg-white rounded-lg shadow-xl border border-gray-200 p-4">
+    <div class="flex justify-between items-start mb-2">
+      <h3 class="font-bold text-blue-800">{id}</h3>
+      <button class="close-modal text-gray-400 hover:text-gray-600">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+    
+    <p class="text-sm text-gray-700 mb-3">{name}</p>
+    
+    <div class="grid grid-cols-2 gap-2 text-xs">
+      <div>
+        <p class="font-semibold text-gray-500">Credits</p>
+        <p>{credits}</p>
+      </div>
+      <div>
+        <p class="font-semibold text-gray-500">Type</p>
+        <p>{isElective ? 'Elective' : 'Core'}</p>
+      </div>
+      <div>
+        <p class="font-semibold text-gray-500">Prerequisites</p>
+        <p>None</p> <!-- Dynamic data would go here -->
+      </div>
+      <div>
+        <p class="font-semibold text-gray-500">Availability</p>
+        <p>Fall/Spring</p>
+      </div>
+    </div>
+    
+    <button class="mt-3 w-full py-1 bg-blue-600 hover:bg-blue-700 text-white text-xs rounded transition-colors duration-200">
+      View Details
+    </button>
+  </div>
+
+  <script>
+    // Modal toggle functionality
+    document.querySelector('.info-btn')?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const modal = (e.currentTarget as HTMLElement).closest('.course-card')?.querySelector('.course-modal');
+      modal.classList.toggle('hidden');
+    });
+
+    document.querySelector('.close-modal')?.addEventListener('click', (e) => {
+      (e.currentTarget as HTMLElement).closest('.course-modal')?.classList.add('hidden');
+    });
+
+    // Close modal when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!(e.target as Element).closest('.course-modal') && !(e.target as Element).closest('.info-btn')) {
+        document.querySelectorAll('.course-modal').forEach(modal => {
+          modal.classList.add('hidden');
+        });
+      }
+    });
+  </script>
+
+  <style>
+    .course-card {
+      min-width: 150px;
+    }
+    
+    @media (max-width: 768px) {
+      .course-card {
+        min-width: 120px;
+        height: 100px;
+      }
+    }
+    
+    @media (max-width: 640px) {
+      .course-card {
+        min-width: 100px;
+        height: 90px;
+      }
+    }
+  </style>
+</div>
