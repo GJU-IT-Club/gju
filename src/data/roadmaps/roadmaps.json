@@ -1,0 +1,31 @@
+{
+  "plans": [
+    {
+      "id": "cs-general-2022-2023", 
+      "title": "Computer Science - General Track",
+      "major": "Computer Science",
+      "version": "2022/2023",
+      "track": "General Track",
+      "courseIds": ["CS116", "CS1160", "CS117", "CS1170", "CS201", "CS222", "MATH101", "ECE317"],
+      "dualStudies": false
+    },
+    {
+      "id": "cs-ds-2022-2023",
+      "title": "Computer Science - Data Science Track",
+      "major": "Computer Science",
+      "version": "2022/2023",
+      "track": "Data Science Track",
+      "courseIds": ["CS116", "CS1160", "CS117", "CS1170", "CS201", "CS222", "MATH101", "MATH102"],
+      "dualStudies": false
+    },
+    {
+      "id": "ce-ai-2018-2019",
+      "title": "Computer Engineering - AI Track",
+      "major": "Computer Engineering",
+      "version": "2018/2019",
+      "track": "AI Track",
+      "courseIds": ["CS116", "CS1160", "CS117", "CS1170", "CS222", "MATH101", "MATH102"],
+      "dualStudies": false
+    }
+  ]
+}
