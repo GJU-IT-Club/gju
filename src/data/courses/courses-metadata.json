@@ -18,6 +18,15 @@
       "category": "Core",
       "year": 1
     },
+    "SFT100": {
+      "id": "SFT100",
+      "name": "SOFT Skills",
+      "creditHours": 3,
+      "prerequisites": [""],
+      "corequisites": [""],
+      "category": "Core",
+      "year": 1
+    },
     "CS117": {
       "id": "CS117",
       "name": "Object-Oriented Programming",
@@ -36,6 +45,5 @@
       "category": "Core",
       "year": 1
     }
- 
   }
 }
