@@ -5,8 +5,8 @@
       "name": "Computing Fundamentals",
       "creditHours": 3,
       "prerequisites": [],
-      "corequisites": ["CS1160"],
-      "category": "Core",
+      "corequisites": [],
+      "category": "School Req",
       "year": 1
     },
     "CS1160": {
@@ -15,16 +15,16 @@
       "creditHours": 1,
       "prerequisites": [],
       "corequisites": ["CS116"],
-      "category": "Core",
+      "category": "School Req",
       "year": 1
     },
     "SFT100": {
       "id": "SFT100",
       "name": "SOFT Skills",
       "creditHours": 3,
-      "prerequisites": [""],
-      "corequisites": [""],
-      "category": "Core",
+      "prerequisites": [],
+      "corequisites": [],
+      "category": "Uni Req",
       "year": 1
     },
     "CS117": {
@@ -32,8 +32,8 @@
       "name": "Object-Oriented Programming",
       "creditHours": 3,
       "prerequisites": ["CS116"],
-      "corequisites": ["CS1170"],
-      "category": "Core",
+      "corequisites": [],
+      "category": "Prog Req",
       "year": 1
     },
     "CS1170": {
@@ -42,8 +42,215 @@
       "creditHours": 1,
       "prerequisites": ["CS116", "CS1160"],
       "corequisites": ["CS117"],
-      "category": "Core",
+      "category": "Prog Req",
       "year": 1
+    },
+    "CS460": {
+      "id": "CS460",
+      "name": "Data Mining",
+      "creditHours": 3,
+      "prerequisites": ["CS117"],
+      "corequisites": [],
+      "category": "Track Req",
+      "year": 4
+    },
+    "ARB100": {
+      "id": "ARB100",
+      "name": "Arabic",
+      "creditHours": 3,
+      "prerequisites": [],
+      "corequisites": [],
+      "category": "School Req",
+      "year": 1
+    },
+    "ENGL1001": {
+      "id": "ENGL1001",
+      "name": "Upper-Intermediate English",
+      "creditHours": 3,
+      "prerequisites": [],
+      "corequisites": [],
+      "category": "School Req",
+      "year": 1
+    },
+    "ENGL1002": {
+      "id": "ENGL1002",
+      "name": "Advanced English",
+      "creditHours": 3,
+      "prerequisites": ["ENGL1001"],
+      "corequisites": [],
+      "category": "School Req",
+      "year": 1
+    },
+    "GERL101": {
+      "id": "GERL101",
+      "name": "German I",
+      "creditHours": 3,
+      "prerequisites": [],
+      "corequisites": [],
+      "category": "Language",
+      "year": 1
+    },
+    "GERL102": {
+      "id": "GERL102",
+      "name": "German II",
+      "creditHours": 3,
+      "prerequisites": ["GERL101"],
+      "corequisites": [],
+      "category": "Language",
+      "year": 1
+    },
+    "GERL201": {
+      "id": "GERL201",
+      "name": "German III",
+      "creditHours": 3,
+      "prerequisites": ["GERL102"],
+      "corequisites": [],
+      "category": "Language",
+      "year": 2
+    },
+    "GERL202": {
+      "id": "GERL202",
+      "name": "German IV",
+      "creditHours": 3,
+      "prerequisites": ["GERL201"],
+      "corequisites": [],
+      "category": "Language",
+      "year": 2
+    },
+    "MATH101": {
+      "id": "MATH101",
+      "name": "Calculus I",
+      "creditHours": 3,
+      "prerequisites": [],
+      "corequisites": [],
+      "category": "School Req",
+      "year": 1
+    },
+    "MATH102": {
+      "id": "MATH102",
+      "name": "Calculus II",
+      "creditHours": 3,
+      "prerequisites": ["MATH101"],
+      "corequisites": [],
+      "category": "School Req",
+      "year": 1
+    },
+    "CE212": {
+      "id": "CE212",
+      "name": "Digital Systems",
+      "creditHours": 3,
+      "prerequisites": ["CS116"],
+      "corequisites": [],
+      "category": "School Req",
+      "year": 2
+    },
+    "CE2120": {
+      "id": "CE2120",
+      "name": "Digital Systems Lab",
+      "creditHours": 1,
+      "prerequisites": ["CS116"],
+      "corequisites": ["CE212"],
+      "category": "School Req",
+      "year": 2
+    },
+    "EE317": {
+      "id": "EE317",
+      "name": "Linear Algebra",
+      "creditHours": 3,
+      "prerequisites": ["MATH101"],
+      "corequisites": [],
+      "category": "School Req",
+      "year": 2
+    },
+    "IE121": {
+      "id": "IE121",
+      "name": "Probability and Statistics",
+      "creditHours": 3,
+      "prerequisites": ["MATH101"],
+      "corequisites": [],
+      "category": "Prog Req",
+      "year": 2
+    },
+    "CS201": {
+      "id": "CS201",
+      "name": "Discrete Structures",
+      "creditHours": 3,
+      "prerequisites": [],
+      "corequisites": [],
+      "category": "Prog Req",
+      "year": 2
+    },
+    "CE201": {
+      "id": "CE201",
+      "name": "Computer Architecture and Organization",
+      "creditHours": 3,
+      "prerequisites": ["CE212"],
+      "corequisites": [],
+      "category": "Prog Req",
+      "year": 2
+    },
+    "CS222": {
+      "id": "CS222",
+      "name": "Theory of Algorithms",
+      "creditHours": 3,
+      "prerequisites": ["CS116", "CS201"],
+      "corequisites": [],
+      "category": "Prog Req",
+      "year": 2
+    },
+    "CS223": {
+      "id": "CS223",
+      "name": "Data Structures",
+      "creditHours": 3,
+      "prerequisites": ["CS116"],
+      "corequisites": [],
+      "category": "Prog Req",
+      "year": 2
+    },
+    "CS264": {
+      "id": "CS264",
+      "name": "Visual Programming",
+      "creditHours": 3,
+      "prerequisites": ["CS117"],
+      "corequisites": [],
+      "category": "Prog Req",
+      "year": 2
+    },
+    "CS330": {
+      "id": "CS330",
+      "name": "Image Understanding",
+      "creditHours": 3,
+      "prerequisites": ["CS223", "EE317"],
+      "corequisites": [],
+      "category": "Track Req",
+      "year": 3
+    },
+    "CS332": {
+      "id": "CS332",
+      "name": "Computer Graphics",
+      "creditHours": 3,
+      "prerequisites": ["CS223", "EE317"],
+      "corequisites": [],
+      "category": "Track Req",
+      "year": 3
+    },
+    "CS419": {
+      "id": "CS419",
+      "name": "Compiler Construction",
+      "creditHours": 3,
+      "prerequisites": ["CS222", "CS223"],
+      "corequisites": [],
+      "category": "Track Req",
+      "year": 4
+    },
+    "CS477": {
+      "id": "CS477",
+      "name": "Mobile Computing",
+      "creditHours": 3,
+      "prerequisites": ["CS117"],
+      "corequisites": [],
+      "category": "Track Req",
+      "year": 4
     }
   }
 }

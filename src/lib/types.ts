@@ -7,12 +7,19 @@ export interface Roadmap {
   courseIds: string[];
   dualStudies: boolean;
 }
-export interface Course {
+export type Course = {
   id: string;
   name: string;
-  creditHours:number;
+  creditHours: number;
   prerequisites: string[];
   corequisites: string[];
-  category: string;
+  category:
+    | "Uni Req"
+    | "School Req"
+    | "Prog Req"
+    | "Track Req"
+    | "School Elective"
+    | "Elective"
+    | "Language";
   year: number;
-}
+};

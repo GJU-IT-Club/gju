@@ -7,10 +7,12 @@ import {
   useNodesState,
   useEdgesState,
   addEdge,
+  BackgroundVariant,
 } from "@xyflow/react";
 import type { Roadmap, Course } from "@/lib/types";
 
 import "@xyflow/react/dist/style.css";
+import CourseNode from "./CourseNode";
 
 interface PlansFlowProps {
   roadmap: Roadmap | null;
@@ -18,7 +20,6 @@ interface PlansFlowProps {
 }
 
 const PlansFlow: React.FC<PlansFlowProps> = ({ roadmap, courses }) => {
-  // Generate nodes and edges based on the roadmap data
   const { initialNodes, initialEdges } = useMemo(() => {
     if (!roadmap) return { initialNodes: [], initialEdges: [] };
 
@@ -26,7 +27,6 @@ const PlansFlow: React.FC<PlansFlowProps> = ({ roadmap, courses }) => {
     const edges: any[] = [];
     const coursePositions: Record<string, { x: number; y: number }> = {};
 
-    // First, create nodes with positions
     roadmap.courseIds.forEach((courseId, index) => {
       const course = courses[courseId];
       if (!course) return;
@@ -36,46 +36,54 @@ const PlansFlow: React.FC<PlansFlowProps> = ({ roadmap, courses }) => {
       const xOffset = (index % 3) * 250;
       const yOffset = year * 150;
 
-      // Store position for edge creation
       coursePositions[courseId] = { x: xOffset, y: yOffset };
 
       nodes.push({
         id: courseId,
         position: { x: xOffset, y: yOffset },
+        type: "courseNode",
         data: {
-          label: (
-            <div>
-              <div style={{ fontWeight: "bold" }}>{courseId}</div>
-              <div>{course.name}</div>
-              <div>{course.creditHours} Credits</div>
-            </div>
-          ),
-        },
-        style: {
-          width: 200,
-          border: "1px solid #ddd",
-          borderRadius: "5px",
-          padding: "10px",
+          id: courseId,
+          name: course.name,
+          creditHours: course.creditHours,
+          category: course.category,
+          prerequisites: course.prerequisites || [],
+          corequisites: course.corequisites || [],
         },
       });
     });
-
-    // Then create edges based on prerequisites
-    roadmap.courseIds.forEach((courseId) => {
+    Object.keys(courses).forEach((courseId) => {
       const course = courses[courseId];
       if (!course) return;
 
       course.prerequisites.forEach((prereqId) => {
-        // Skip empty prerequisites
         if (!prereqId) return;
 
-        // Only create edges for prerequisites that exist in this roadmap
-        if (roadmap.courseIds.includes(prereqId)) {
+        if (courses[prereqId]) {
           edges.push({
-            id: `e-${prereqId}-${courseId}`,
+            id: `e-prereq-${prereqId}-${courseId}`,
             source: prereqId,
             target: courseId,
+            sourceHandle: "bottom",
+            targetHandle: "top",
             type: "smoothstep",
+            animated: true,
+          });
+        }
+      });
+
+      course.corequisites?.forEach((coreqId) => {
+        if (!coreqId) return;
+
+        if (courses[coreqId]) {
+          edges.push({
+            id: `e-coreq-${courseId}-${coreqId}`,
+            source: courseId,
+            target: coreqId,
+            sourceHandle: "coreq-out",
+            targetHandle: "coreq-in",
+            type: "straight",
+            style: { stroke: "#d4d4d4" },
             animated: true,
           });
         }
@@ -84,15 +92,22 @@ const PlansFlow: React.FC<PlansFlowProps> = ({ roadmap, courses }) => {
 
     return { initialNodes: nodes, initialEdges: edges };
   }, [roadmap, courses]);
-
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+
+  // Update nodes and edges when initialNodes and initialEdges change
+  React.useEffect(() => {
+    setNodes(initialNodes);
+    setEdges(initialEdges);
+  }, [initialNodes, initialEdges, setNodes, setEdges]);
 
   const onConnect = useCallback(
     (params) => setEdges((eds) => addEdge(params, eds)),
     [setEdges]
   );
-
+  const nodeTypes = {
+    courseNode: CourseNode,
+  };
   return (
     <div
       style={{
@@ -101,7 +116,6 @@ const PlansFlow: React.FC<PlansFlowProps> = ({ roadmap, courses }) => {
         border: "1px solid #ddd",
         borderRadius: "8px",
       }}
-      //   className="min-h-[calc(100vh-4rem)]"
     >
       <ReactFlow
         nodes={nodes}
@@ -109,11 +123,11 @@ const PlansFlow: React.FC<PlansFlowProps> = ({ roadmap, courses }) => {
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
+        nodeTypes={nodeTypes}
         fitView
       >
         <Controls />
-        {/* <MiniMap /> */}
-        <Background variant="dots" gap={12} size={1} />
+        <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
       </ReactFlow>
     </div>
   );
