@@ -42,7 +42,7 @@ const PlansView: React.FC<PlansViewProps> = ({ roadmaps, courses }) => {
   console.warn("Selected Roadmap Courses:", courses);
 
   return (
-    <div className="container flex flex-col mx-auto max-w-full min-h-screen mt-16">
+    <div className="container flex flex-col mx-auto max-w-full  ">
       <div className="flex px-6 py-3 bg-sidebar border-b border-border">
         {/* Selection Control */}
         <div className="w-full md:w-[350px]">
@@ -81,14 +81,13 @@ const PlansView: React.FC<PlansViewProps> = ({ roadmaps, courses }) => {
         </div>
       </div>
 
-      {/* Display selected roadmap */}
       {selectedRoadmap ? (
-        <div className="flex-1 flex flex-col bg-blue-400/50 h-[calc(100vh-120px)]">
+        <div className=" flex flex-col  h-[calc(100vh-120px)]">
           <PlansFlow roadmap={selectedRoadmap} courses={courses} />
         </div>
       ) : (
         <div className="flex-1 flex items-center justify-center">
-          <div className="text-center p-8 bg-slate-50 rounded-lg border">
+          <div className="text-center p-8 bg-background rounded-lg border">
             {filteredRoadmaps.length > 0
               ? "Select a roadmap to view details"
               : "No roadmaps match your search criteria"}

@@ -112,7 +112,7 @@ const PlansFlow: React.FC<PlansFlowProps> = ({ roadmap, courses }) => {
         fitView
       >
         <Controls />
-        <MiniMap />
+        {/* <MiniMap /> */}
         <Background variant="dots" gap={12} size={1} />
       </ReactFlow>
     </div>
