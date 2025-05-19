@@ -1,0 +1,49 @@
+{
+  "courses": {
+    "CS116": {
+      "id": "CS116",
+      "name": "Computing Fundamentals",
+      "creditHours": 3,
+      "prerequisites": [],
+      "corequisites": ["CS1160"],
+      "category": "Core",
+      "year": 1
+    },
+    "CS1160": {
+      "id": "CS1160",
+      "name": "Computing Fundamentals Lab",
+      "creditHours": 1,
+      "prerequisites": [],
+      "corequisites": ["CS116"],
+      "category": "Core",
+      "year": 1
+    },
+    "SFT100": {
+      "id": "SFT100",
+      "name": "SOFT Skills",
+      "creditHours": 3,
+      "prerequisites": [""],
+      "corequisites": [""],
+      "category": "Core",
+      "year": 1
+    },
+    "CS117": {
+      "id": "CS117",
+      "name": "Object-Oriented Programming",
+      "creditHours": 3,
+      "prerequisites": ["CS116"],
+      "corequisites": ["CS1170"],
+      "category": "Core",
+      "year": 1
+    },
+    "CS1170": {
+      "id": "CS1170",
+      "name": "Object-Oriented Programming Lab",
+      "creditHours": 1,
+      "prerequisites": ["CS116", "CS1160"],
+      "corequisites": ["CS117"],
+      "category": "Core",
+      "year": 1
+    }
+  }
+}

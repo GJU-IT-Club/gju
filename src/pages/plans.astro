@@ -1,23 +1,14 @@
 ---
 import MainLayout from "@/layouts/MainLayout.astro";
-const currentPath = Astro.url.pathname;
+import StudyPlans from "@/components/features/plans/StudyPlans.astro";
+const props = {
+  title: "Study Plans",
+  description: "gju.app page",
+};
 ---
 
-<MainLayout title="Settings" description="gju.app settings page">
-  <main class="min-h-screen flex flex-col items-center justify-center p-4">
-    <h1 class="text-2xl font-medium">
-      Welcome to <span
-        class="font-bold bg-gradient-to-r from-blue-600 via-yellow-500 to-amber-400 text-transparent bg-clip-text"
-        >{currentPath}</span
-      >!
-    </h1>
-    <p>
-      This is a simple example of an Astro page. You can use this template to
-      get started with your own project.
-    </p>
-    <p>
-      To learn more about Astro, check out the
-      <a href="https://docs.astro.build">Astro documentation</a>.
-    </p>
+<MainLayout {...props}>
+  <main class="min-h-full pt-16 flex flex-col items-center justify-start">
+    <StudyPlans />
   </main>
 </MainLayout>
