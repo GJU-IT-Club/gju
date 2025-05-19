@@ -1,0 +1,11 @@
+---
+import roadmapsData from "@/data/roadmaps/roadmaps.json";
+import coursesData from "@/data/courses/courses-metadata.json";
+import type { Roadmap } from "@/lib/types";
+import PlansView from "./PlansView";
+// import FlowComponent from "@/components/features/plans/FlowComponent";
+
+const roadmaps = roadmapsData.plans;
+const courses = coursesData.courses;
+---
+<PlansView roadmaps={roadmaps} courses={courses} client:only />

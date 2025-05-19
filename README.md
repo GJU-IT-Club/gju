@@ -4,6 +4,8 @@
     <img src="./public/cover.png" alt="Cover" width="600" />
 </div>
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/04b3d90d-90b5-421b-b1fb-3cdb7cd3b1b1/deploy-status)](https://app.netlify.com/projects/gju-app/deploys)
+
 ## Installation
 
 > [!CAUTION]
@@ -27,6 +29,7 @@ npm i   # install dependencies (requires node)
 - Astro & React
 - Tailwind & Shadcn
 - Typescript
+- [Phosphor Icons](https://phosphoricons.com/)
 
 ## 🌿 Branches
 
