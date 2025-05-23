@@ -1,9 +1,16 @@
 ---
 import MainLayout from "@/layouts/MainLayout.astro";
-import GpaCalculator from "../components/ui/gpa-calculator";
+import GpaCalculator from "@/components/ui/gpa-calculator";
+import GpaTargetCalculator from "@/components/ui/gpa-target-calculator";
 ---
 
 <MainLayout title="Astro Page" description="A simple Astro page example">
-  <br><br><br><br><br>
-  <GpaCalculator client:load />
+  <section class="flex flex-col md:flex-row gap-8 items-start justify-center py-8 px-2 md:px-0 w-full">
+    <div class="w-full md:w-1/2 max-w-xl">
+      <GpaCalculator client:load />
+    </div>
+    <div class="w-full md:w-1/2 max-w-xl">
+      <GpaTargetCalculator client:load />
+    </div>
+  </section>
 </MainLayout>

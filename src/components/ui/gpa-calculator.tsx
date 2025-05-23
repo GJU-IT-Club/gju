@@ -59,37 +59,43 @@ export function GpaCalculator() {
   const rating = getRating(Number(gpaPercentage));
 
   return (
-    <div className="p-4 max-w-xl mx-auto bg-white rounded-2xl shadow-xl">
+    <div className="p-4 max-w-xl mx-auto bg-white rounded-2xl shadow-xl mt-10">
+      <h2 className="text-xl font-bold mb-4">GPA Calculator</h2>
       {courses.map((course, index) => (
-        <div key={index} className="grid grid-cols-4 gap-4 mb-3 items-center">
-          <input
-            type="text"
-            placeholder="Course Name"
-            value={course.name}
-            onChange={(e) => handleCourseChange(index, "name", e.target.value)}
-            className="border p-2 rounded"
-          />
-          <input
-            type="number"
-            min={1}
-            value={course.credit}
-            onChange={(e) =>
-              handleCourseChange(index, "credit", e.target.value)
-            }
-            className="border p-2 rounded"
-            placeholder="Credit Hours"
-          />
-          <input
-            type="number"
-            min={0}
-            max={100}
-            value={course.percentage}
-            onChange={(e) =>
-              handleCourseChange(index, "percentage", e.target.value)
-            }
-            className="border p-2 rounded"
-            placeholder="Grade %"
-          />
+        <div key={index} className="grid grid-cols-4 gap-4 mb-3 items-end">
+          <div className="flex flex-col">
+            <label className="mb-1 text-sm font-medium">Course Name</label>
+            <input
+              type="text"
+              placeholder="e.g. Calculus"
+              value={course.name}
+              onChange={(e) => handleCourseChange(index, "name", e.target.value)}
+              className="border p-2 rounded"
+            />
+          </div>
+          <div className="flex flex-col">
+            <label className="mb-1 text-sm font-medium">Credit Hours</label>
+            <input
+              type="number"
+              min={1}
+              value={course.credit}
+              onChange={(e) => handleCourseChange(index, "credit", e.target.value)}
+              className="border p-2 rounded"
+              placeholder="e.g. 3"
+            />
+          </div>
+          <div className="flex flex-col">
+            <label className="mb-1 text-sm font-medium">Grade %</label>
+            <input
+              type="number"
+              min={0}
+              max={100}
+              value={course.percentage}
+              onChange={(e) => handleCourseChange(index, "percentage", e.target.value)}
+              className="border p-2 rounded"
+              placeholder="e.g. 85"
+            />
+          </div>
           <Button
             variant="destructive"
             onClick={() => deleteCourse(index)}
@@ -102,7 +108,7 @@ export function GpaCalculator() {
 
       <Button
         onClick={addCourse}
-        className="w-full mt-2 bg-blue-600 hover:bg-blue-700"
+        className="w-full mt-2 "
       >
         Add Course
       </Button>
