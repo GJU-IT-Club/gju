@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { PlusCircle, Trash } from "lucide-react";
 
@@ -16,10 +16,23 @@ function getRating(gpaPercentage: number): string {
   return "Fail";
 }
 
-function GpaCalculator({ onDelete, showDelete }: { onDelete?: () => void; showDelete: boolean }) {
+interface GpaCalculatorProps {
+  semesterName?: string;
+  onDelete?: () => void;
+  showDelete: boolean;
+  onGpaChange?: (gpa: number | null) => void;
+}
+
+function GpaCalculator({ semesterName, onDelete, showDelete, onGpaChange }: GpaCalculatorProps) {
   const [courses, setCourses] = useState<Course[]>([
-    { name: "Course name", credit: 3, percentage: 85 },
+    { name: "", credit: 3, percentage: 85 },
   ]);
+
+  useEffect(() => {
+    const gpa = calculateGpaPercentage();
+    if (onGpaChange) onGpaChange(isNaN(gpa) ? null : gpa);
+    // eslint-disable-next-line
+  }, [courses]);
 
   const handleCourseChange = (
     index: number,
@@ -69,9 +82,7 @@ function GpaCalculator({ onDelete, showDelete }: { onDelete?: () => void; showDe
           <Trash className="h-6 w-6" />
         </button>
       )}
-      
-      <h2 className="text-xl font-bold mb-4">GPA Calculator</h2>
-      
+      <h2 className="text-xl font-bold mb-4">{semesterName || "Semester"}</h2>
       <div className="space-y-3">
         {courses.map((course, index) => (
           <div key={index} className="grid grid-cols-4 gap-3 items-end">
@@ -124,11 +135,9 @@ function GpaCalculator({ onDelete, showDelete }: { onDelete?: () => void; showDe
           </div>
         ))}
       </div>
-
       <Button onClick={addCourse} className="w-full mt-4">
         Add Course
       </Button>
-
       <div className="mt-6 p-4 bg-gray-50 rounded-lg text-center">
         <div className="text-lg font-semibold">
           GPA (%): <span className="text-blue-600">{gpaPercentage}</span>
