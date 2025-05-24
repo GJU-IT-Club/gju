@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import GpaCalculator from "@/components/ui/gpa-calculator";
 import GpaTargetCalculator from "@/components/ui/gpa-target-calculator";
 import { Button } from "@/components/ui/button";
@@ -29,10 +29,33 @@ export function AddableGpaCalculators() {
   const semesterGpas = calculators.map((id) => gpaMap[id]).filter((g) => g !== null && g !== undefined) as number[];
   const totalGpa = semesterGpas.length > 0 ? (semesterGpas.reduce((a, b) => a + b, 0) / semesterGpas.length).toFixed(2) : "-";
 
+  // Load calculators and gpaMap from localStorage on mount
+  useEffect(() => {
+    const savedCalculators = localStorage.getItem("gpa_calculators");
+    const savedGpaMap = localStorage.getItem("gpa_map");
+    if (savedCalculators) {
+      try {
+        setCalculators(JSON.parse(savedCalculators));
+      } catch {}
+    }
+    if (savedGpaMap) {
+      try {
+        setGpaMap(JSON.parse(savedGpaMap));
+      } catch {}
+    }
+  }, []);
+
+  // Save calculators and gpaMap to localStorage on change
+  useEffect(() => {
+    localStorage.setItem("gpa_calculators", JSON.stringify(calculators));
+    localStorage.setItem("gpa_map", JSON.stringify(gpaMap));
+  }, [calculators, gpaMap]);
+
   return (
     <div>
       {/* Fixed Tab Bar at the very top */}
-      <div className="fixed top-0 left-0 right-0 bg-gray-100 border-b border-gray-200 z-50 flex flex-col sm:flex-row items-stretch sm:items-center justify-between px-2 sm:px-4 h-16">
+      <div className="fixed top-0 left-15 sm:top-[3.875rem] sm:left-[3.875rem] right-0 bg-gray-100 border-b border-gray-200 z-50 flex flex-col sm:flex-row items-stretch sm:items-center justify-between px-2 sm:px-4 h-16
+">
         <div className="flex w-full sm:w-auto">
           <button
             onClick={() => setActiveTab("gpa")}
@@ -84,12 +107,19 @@ export function AddableGpaCalculators() {
         <div className="container mx-auto px-4">
           {activeTab === "gpa" && (
             <>
-              <div className="text-center mb-8">
+              {/* Mobile: show Total GPA headline instead of GPA Calculators */}
+              <div className="md:hidden text-center mb-8">
+                <h1 className="text-3xl font-bold text-blue-700 mb-4">
+                  Total GPA: <span className="font-bold">{totalGpa}</span>
+                </h1>
+              </div>
+              {/* Desktop: show GPA Calculators headline */}
+              <div className="hidden md:block text-center mb-8">
                 <h1 className="text-3xl font-bold text-gray-800 mb-4">GPA Calculators</h1>
               </div>
               {/* Desktop: horizontal scroll, Mobile: vertical stack with add button at bottom */}
               <div className="hidden md:block overflow-x-auto pb-4">
-                <div className="flex gap-6 min-w-max px-4 items-start">
+                <div className="flex gap-6 min-w-max px-4 pl-15 items-start">
                   {calculators.map((id, idx) => (
                     <GpaCalculator
                       key={id}
