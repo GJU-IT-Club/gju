@@ -1,0 +1,137 @@
+import React, { useCallback, useMemo } from "react";
+import {
+  ReactFlow,
+  MiniMap,
+  Controls,
+  Background,
+  useNodesState,
+  useEdgesState,
+  addEdge,
+  BackgroundVariant,
+} from "@xyflow/react";
+import type { Roadmap, Course } from "@/lib/types";
+
+import "@xyflow/react/dist/style.css";
+import CourseNode from "./CourseNode";
+
+interface PlansFlowProps {
+  roadmap: Roadmap | null;
+  courses: { [key: string]: Course };
+}
+
+const PlansFlow: React.FC<PlansFlowProps> = ({ roadmap, courses }) => {
+  const { initialNodes, initialEdges } = useMemo(() => {
+    if (!roadmap) return { initialNodes: [], initialEdges: [] };
+
+    const nodes: any[] = [];
+    const edges: any[] = [];
+    const coursePositions: Record<string, { x: number; y: number }> = {};
+
+    roadmap.courseIds.forEach((courseId, index) => {
+      const course = courses[courseId];
+      if (!course) return;
+
+      // Calculate position based on year and some offset to prevent overlapping
+      const year = course.year || 1;
+      const xOffset = (index % 3) * 250;
+      const yOffset = year * 150;
+
+      coursePositions[courseId] = { x: xOffset, y: yOffset };
+
+      nodes.push({
+        id: courseId,
+        position: { x: xOffset, y: yOffset },
+        type: "courseNode",
+        data: {
+          id: courseId,
+          name: course.name,
+          creditHours: course.creditHours,
+          category: course.category,
+          prerequisites: course.prerequisites || [],
+          corequisites: course.corequisites || [],
+        },
+      });
+    });
+    Object.keys(courses).forEach((courseId) => {
+      const course = courses[courseId];
+      if (!course) return;
+
+      course.prerequisites.forEach((prereqId) => {
+        if (!prereqId) return;
+
+        if (courses[prereqId]) {
+          edges.push({
+            id: `e-prereq-${prereqId}-${courseId}`,
+            source: prereqId,
+            target: courseId,
+            sourceHandle: "bottom",
+            targetHandle: "top",
+            type: "smoothstep",
+            animated: true,
+          });
+        }
+      });
+
+      course.corequisites?.forEach((coreqId) => {
+        if (!coreqId) return;
+
+        if (courses[coreqId]) {
+          edges.push({
+            id: `e-coreq-${courseId}-${coreqId}`,
+            source: courseId,
+            target: coreqId,
+            sourceHandle: "coreq-out",
+            targetHandle: "coreq-in",
+            type: "straight",
+            style: { stroke: "#d4d4d4" },
+            animated: true,
+          });
+        }
+      });
+    });
+
+    return { initialNodes: nodes, initialEdges: edges };
+  }, [roadmap, courses]);
+  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+
+  // Update nodes and edges when initialNodes and initialEdges change
+  React.useEffect(() => {
+    setNodes(initialNodes);
+    setEdges(initialEdges);
+  }, [initialNodes, initialEdges, setNodes, setEdges]);
+
+  const onConnect = useCallback(
+    (params) => setEdges((eds) => addEdge(params, eds)),
+    [setEdges]
+  );
+
+  const nodeTypes = {
+    courseNode: CourseNode,
+  };
+  return (
+    <div
+      style={{
+        width: "100%",
+        height: "85dvh",
+        // border: "1px solid #ddd",
+        // borderRadius: "8px",
+      }}
+    >
+      <ReactFlow
+        nodes={nodes}
+        edges={edges}
+        onNodesChange={onNodesChange}
+        onEdgesChange={onEdgesChange}
+        onConnect={onConnect}
+        nodeTypes={nodeTypes}
+        fitView
+      >
+        <Controls />
+        <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
+      </ReactFlow>
+    </div>
+  );
+};
+
+export default PlansFlow;

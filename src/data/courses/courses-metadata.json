@@ -18,15 +18,7 @@
       "category": "School Req",
       "year": 1
     },
-    "SFT100": {
-      "id": "SFT100",
-      "name": "SOFT Skills",
-      "creditHours": 3,
-      "prerequisites": [],
-      "corequisites": [],
-      "category": "Uni Req",
-      "year": 1
-    },
+
     "CS117": {
       "id": "CS117",
       "name": "Object-Oriented Programming",
@@ -40,7 +32,7 @@
       "id": "CS1170",
       "name": "Object-Oriented Programming Lab",
       "creditHours": 1,
-      "prerequisites": ["CS116", "CS1160"],
+      "prerequisites": [],
       "corequisites": ["CS117"],
       "category": "Prog Req",
       "year": 1
@@ -60,7 +52,7 @@
       "creditHours": 3,
       "prerequisites": [],
       "corequisites": [],
-      "category": "School Req",
+      "category": "Uni Req",
       "year": 1
     },
     "ENGL1001": {
@@ -69,7 +61,7 @@
       "creditHours": 3,
       "prerequisites": [],
       "corequisites": [],
-      "category": "School Req",
+      "category": "Uni Req",
       "year": 1
     },
     "ENGL1002": {
@@ -78,7 +70,7 @@
       "creditHours": 3,
       "prerequisites": ["ENGL1001"],
       "corequisites": [],
-      "category": "School Req",
+      "category": "Uni Req",
       "year": 1
     },
     "GERL101": {
@@ -148,7 +140,7 @@
       "id": "CE2120",
       "name": "Digital Systems Lab",
       "creditHours": 1,
-      "prerequisites": ["CS116"],
+      "prerequisites": [""],
       "corequisites": ["CE212"],
       "category": "School Req",
       "year": 2
@@ -162,8 +154,8 @@
       "category": "School Req",
       "year": 2
     },
-    "IE121": {
-      "id": "IE121",
+    "IE0121": {
+      "id": "IE0121",
       "name": "Probability and Statistics",
       "creditHours": 3,
       "prerequisites": ["MATH101"],
@@ -251,6 +243,528 @@
       "corequisites": [],
       "category": "Track Req",
       "year": 4
+    },
+    "MILS100": {
+      "id": "MILS100",
+      "name": "Military Science",
+      "creditHours": 3,
+      "prerequisites": [],
+      "corequisites": [],
+      "category": "Uni Req",
+      "year": 1
+    },
+    "NE101": {
+      "id": "NE101",
+      "name": "National Education",
+      "creditHours": 3,
+      "prerequisites": [],
+      "corequisites": [],
+      "category": "Uni Req",
+      "year": 1
+    },
+    "CS263": {
+      "id": "CS263",
+      "name": "Database Management Systems",
+      "creditHours": 3,
+      "prerequisites": ["CS117"],
+      "corequisites": [],
+      "category": "Prog Req",
+      "year": 2
+    },
+    "CS323": {
+      "id": "CS323",
+      "name": "Computational Theory",
+      "creditHours": 3,
+      "prerequisites": ["CS222", "CS223"],
+      "corequisites": [],
+      "category": "Prog Req",
+      "year": 3
+    },
+    "CS342": {
+      "id": "CS342",
+      "name": "Software Engineering",
+      "creditHours": 3,
+      "prerequisites": ["CS117", "CS263"],
+      "corequisites": [],
+      "category": "Prog Req",
+      "year": 3
+    },
+    "CE352": {
+      "id": "CE352",
+      "name": "Computer Networks",
+      "creditHours": 3,
+      "prerequisites": ["CE201"],
+      "corequisites": [],
+      "category": "Prog Req",
+      "year": 3
+    },
+    "CS355": {
+      "id": "CS355",
+      "name": "Web Technologies",
+      "creditHours": 3,
+      "prerequisites": ["CS117", "CS263"],
+      "corequisites": [],
+      "category": "Prog Req",
+      "year": 3
+    },
+    "CS356": {
+      "id": "CS356",
+      "name": "Information Security",
+      "creditHours": 3,
+      "prerequisites": ["CS263"],
+      "corequisites": [],
+      "category": "Prog Req",
+      "year": 3
+    },
+    "CE357": {
+      "id": "CE357",
+      "name": "Operating Systems",
+      "creditHours": 3,
+      "prerequisites": ["CE201"],
+      "corequisites": [],
+      "category": "Prog Req",
+      "year": 3
+    },
+    "CE370": {
+      "id": "CE370",
+      "name": "Operating Systems Lab",
+      "creditHours": 1,
+      "prerequisites": [],
+      "corequisites": ["CE357"],
+      "category": "Prog Req",
+      "year": 3
+    },
+    "CS416": {
+      "id": "CS416",
+      "name": "Systems Programming",
+      "creditHours": 3,
+      "prerequisites": ["CS223"],
+      "corequisites": [],
+      "category": "Prog Req",
+      "year": 4
+    },
+    "CS451": {
+      "id": "CS451",
+      "name": "Artificial Intelligence",
+      "creditHours": 3,
+      "prerequisites": ["CS222", "CS223"],
+      "corequisites": [],
+      "category": "Track Req",
+      "year": 4
+    },
+    "CE331": {
+      "id": "CE331",
+      "name": "Signals and Systems",
+      "creditHours": 3,
+      "prerequisites": ["MATH203"],
+      "corequisites": [],
+      "category": "Prog Req",
+      "year": 3
+    },
+    "CE342": {
+      "id": "CE342",
+      "name": "Microprocessor and Microcomputer Systems",
+      "creditHours": 3,
+      "prerequisites": ["CE212"],
+      "corequisites": [],
+      "category": "Prog Req",
+      "year": 3
+    },
+    "CE3420": {
+      "id": "CE3420",
+      "name": "Microprocessor and Microcomputer Systems Lab",
+      "creditHours": 1,
+      "prerequisites": [],
+      "corequisites": ["CE342"],
+      "category": "Prog Req",
+      "year": 3
+    },
+    "CE354": {
+      "id": "CE354",
+      "name": "Computer Security",
+      "creditHours": 3,
+      "prerequisites": ["CE352"],
+      "corequisites": [],
+      "category": "Track Req",
+      "year": 3
+    },
+    "CE355": {
+      "id": "CE355",
+      "name": "Data Communication",
+      "creditHours": 3,
+      "prerequisites": ["CE331"],
+      "corequisites": [],
+      "category": "Prog Req",
+      "year": 3
+    },
+    "CE3561": {
+      "id": "CE3561",
+      "name": "Computer Networks Lab",
+      "creditHours": 1,
+      "prerequisites": [],
+      "corequisites": ["CE352"],
+      "category": "Prog Req",
+      "year": 3
+    },
+    "CE377": {
+      "id": "CE377",
+      "name": "Machine Learning",
+      "creditHours": 3,
+      "prerequisites": ["EE315", "EE317"],
+      "corequisites": [],
+      "category": "Track Req",
+      "year": 3
+    },
+    "CE391": {
+      "id": "CE391",
+      "name": "Field Training",
+      "creditHours": 0,
+      "prerequisites": ["CS116"],
+      "corequisites": [],
+      "category": "Prog Req",
+      "year": 3
+    },
+    "CE441": {
+      "id": "CE441",
+      "name": "Embedded System Design",
+      "creditHours": 3,
+      "prerequisites": ["CE201"],
+      "corequisites": [],
+      "category": "Prog Req",
+      "year": 4
+    },
+    "CE493": {
+      "id": "CE493",
+      "name": "International Internship",
+      "creditHours": 12,
+      "prerequisites": ["CS116"],
+      "corequisites": [],
+      "category": "Prog Req",
+      "year": 4
+    },
+    "CE502": {
+      "id": "CE502",
+      "name": "Parallel Architectures and Parallel Algorithms",
+      "creditHours": 3,
+      "prerequisites": ["CE201", "CS222", "CS223"],
+      "corequisites": [],
+      "category": "Prog Req",
+      "year": 5
+    },
+    "CE592": {
+      "id": "CE592",
+      "name": "Senior Project I",
+      "creditHours": 1,
+      "prerequisites": ["CS116"],
+      "corequisites": [],
+      "category": "Prog Req",
+      "year": 5
+    },
+    "CE594": {
+      "id": "CE594",
+      "name": "Senior Project II",
+      "creditHours": 3,
+      "prerequisites": ["CE592"],
+      "corequisites": [],
+      "category": "Prog Req",
+      "year": 5
+    },
+    "CS391": {
+      "id": "CS391",
+      "name": "Field Training",
+      "creditHours": 0,
+      "prerequisites": ["CS116"],
+      "corequisites": [],
+      "category": "Prog Req",
+      "year": 3
+    },
+    "CS491": {
+      "id": "CS491",
+      "name": "Senior Project I",
+      "creditHours": 1,
+      "prerequisites": ["CS116"],
+      "corequisites": [],
+      "category": "Prog Req",
+      "year": 4
+    },
+    "CS492": {
+      "id": "CS492",
+      "name": "Senior Project II",
+      "creditHours": 3,
+      "prerequisites": ["CS491"],
+      "corequisites": [],
+      "category": "Prog Req",
+      "year": 4
+    },
+    "PHYS103": {
+      "id": "PHYS103",
+      "name": "Physics I",
+      "creditHours": 3,
+      "prerequisites": [],
+      "corequisites": [],
+      "category": "School Req",
+      "year": 1
+    },
+    "PHYS104": {
+      "id": "PHYS104",
+      "name": "Physics II",
+      "creditHours": 3,
+      "prerequisites": ["PHYS103"],
+      "corequisites": [],
+      "category": "School Req",
+      "year": 1
+    },
+    "PHYS106": {
+      "id": "PHYS106",
+      "name": "Physics Lab",
+      "creditHours": 1,
+      "prerequisites": [],
+      "corequisites": ["PHYS104"],
+      "category": "School Req",
+      "year": 1
+    },
+    "MATH203": {
+      "id": "MATH203",
+      "name": "Applied Mathematics for Engineers",
+      "creditHours": 3,
+      "prerequisites": ["MATH102"],
+      "corequisites": [],
+      "category": "School Req",
+      "year": 2
+    },
+    "MATH205": {
+      "id": "MATH205",
+      "name": "Differential Equations",
+      "creditHours": 3,
+      "prerequisites": ["MATH102"],
+      "corequisites": [],
+      "category": "School Req",
+      "year": 2
+    },
+    "CHEM103": {
+      "id": "CHEM103",
+      "name": "General Chemistry",
+      "creditHours": 3,
+      "prerequisites": [],
+      "corequisites": [],
+      "category": "School Req",
+      "year": 1
+    },
+    "EE241": {
+      "id": "EE241",
+      "name": "Electronics 1",
+      "creditHours": 3,
+      "prerequisites": ["ENE2111", "CS116"],
+      "corequisites": [],
+      "category": "School Req",
+      "year": 2
+    },
+    "EE2410": {
+      "id": "EE2410",
+      "name": "Electronics 1 Lab",
+      "creditHours": 1,
+      "prerequisites": [],
+      "corequisites": ["EE241"],
+      "category": "School Req",
+      "year": 2
+    },
+    "EE315": {
+      "id": "EE315",
+      "name": "Probability, Statistics and Random Processes",
+      "creditHours": 3,
+      "prerequisites": ["MATH102"],
+      "corequisites": [],
+      "category": "School Req",
+      "year": 2
+    },
+    "ENE2111": {
+      "id": "ENE2111",
+      "name": "Fundamentals of Electrical Circuits",
+      "creditHours": 3,
+      "prerequisites": ["PHYS104"],
+      "corequisites": ["MATH203"],
+      "category": "School Req",
+      "year": 2
+    },
+    "ENE213": {
+      "id": "ENE213",
+      "name": "Electrical Circuits Lab",
+      "creditHours": 1,
+      "prerequisites": [],
+      "corequisites": ["ENE2111"],
+      "category": "School Req",
+      "year": 2
+    },
+    "ELC101": {
+      "id": "ELC101",
+      "name": "Elective I",
+      "creditHours": 3,
+      "prerequisites": [],
+      "corequisites": [],
+      "category": "Uni Req",
+      "year": 1
+    },
+    "ELC102": {
+      "id": "ELC102",
+      "name": "Elective II",
+      "creditHours": 3,
+      "prerequisites": [],
+      "corequisites": [],
+      "category": "Uni Req",
+      "year": 1
+    },
+    "GERL301": {
+      "id": "GERL301",
+      "name": "German V",
+      "creditHours": 3,
+      "prerequisites": ["GERL202"],
+      "corequisites": [],
+      "category": "Language",
+      "year": 3
+    },
+    "GERL302": {
+      "id": "GERL302",
+      "name": "German VI",
+      "creditHours": 3,
+      "prerequisites": ["GERL301"],
+      "corequisites": [],
+      "category": "Language",
+      "year": 3
+    },
+    "PREL1": {
+      "id": "PREL1",
+      "name": "Program Elective I",
+      "creditHours": 3,
+      "prerequisites": [],
+      "corequisites": [],
+      "category": "Track Req",
+      "year": 1
+    },
+    "PREL2": {
+      "id": "PREL2",
+      "name": "Program Elective II",
+      "creditHours": 3,
+      "prerequisites": [],
+      "corequisites": [],
+      "category": "Track Req",
+      "year": 1
+    },
+    "PREL3": {
+      "id": "PREL3",
+      "name": "Program Elective III",
+      "creditHours": 3,
+      "prerequisites": [],
+      "corequisites": [],
+      "category": "Track Req",
+      "year": 1
+    },
+    "PREL4": {
+      "id": "PREL4",
+      "name": "Program Elective IV",
+      "creditHours": 3,
+      "prerequisites": [],
+      "corequisites": [],
+      "category": "Track Req",
+      "year": 1
+    },
+    "BM371": {
+      "id": "BM371",
+      "name": "Numerical Methods for Engineers ",
+      "creditHours": 3,
+      "prerequisites": ["CS116"],
+      "corequisites": [],
+      "category": "Prog Req",
+      "year": 3
+    },
+    "CE461": {
+      "id": "CE461",
+      "name": "Artificial Intelligence for Computer Engineers",
+      "creditHours": 3,
+      "prerequisites": ["CS223", "EE317"],
+      "corequisites": [],
+      "category": "Track Req",
+      "year": 4
+    },
+    "CE521": {
+      "id": "CE521",
+      "name": "Computer Vision",
+      "creditHours": 3,
+      "prerequisites": ["CS223", "EE317"],
+      "corequisites": [],
+      "category": "Track Req",
+      "year": 5
+    },
+    "CE561": {
+      "id": "CE561",
+      "name": "Machine Learning for Computer Engineers",
+      "creditHours": 3,
+      "prerequisites": ["CE377"],
+      "corequisites": [],
+      "category": "Track Req",
+      "year": 5
+    },
+    "CE565": {
+      "id": "CE565",
+      "name": "Robotics",
+      "creditHours": 3,
+      "prerequisites": ["CE342", "CE377"],
+      "corequisites": [],
+      "category": "Track Req",
+      "year": 5
+    },
+    "CS470": {
+      "id": "CS470",
+      "name": "Cryptography",
+      "creditHours": 3,
+      "prerequisites": ["CS222"],
+      "corequisites": [],
+      "category": "Track Req",
+      "year": 4
+    },
+    "CS4713": {
+      "id": "CS4713",
+      "name": "Ethical Hacking",
+      "creditHours": 3,
+      "prerequisites": ["CE352"],
+      "corequisites": [],
+      "category": "Track Req",
+      "year": 4
+    },
+    "CS4714": {
+      "id": "CS4714",
+      "name": "Digital Forensics",
+      "creditHours": 3,
+      "prerequisites": ["CE352"],
+      "corequisites": [],
+      "category": "Track Req",
+      "year": 4
+    },
+    "EE570": {
+      "id": "EE570",
+      "name": "Cloud Computing and Big Data",
+      "creditHours": 3,
+      "prerequisites": ["CE352"],
+      "corequisites": [],
+      "category": "Track Req",
+      "year": 5
+    },
+    "CE452": {
+      "id": "CE452",
+      "name": "Networks Protocols",
+      "creditHours": 3,
+      "prerequisites": ["CE352"],
+      "corequisites": [],
+      "category": "Track Req",
+      "year": 4
+    },
+    "EE343": {
+      "id": "EE343",
+      "name": "Digital Electronics",
+      "creditHours": 3,
+      "prerequisites": ["EE241"],
+      "corequisites": [],
+      "category": "Prog Req",
+      "year": 3
     }
   }
 }
