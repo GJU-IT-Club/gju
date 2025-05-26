@@ -49,5 +49,5 @@ for faculty in soup.find_all("div", class_="views-row"):
 
 
 df = pd.DataFrame(entries)
-df.to_csv("src/data/professors/professors.json", index=False)
+df.to_csv("src/data/professors/professors.csv", index=False)
 #print("Saved to gju_faculty_directory_flat.csv")
