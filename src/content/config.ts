@@ -10,7 +10,15 @@ const courseContent = defineCollection({
     creditHours: z.number(),
     prerequisites: z.array(z.string()).optional(),
     corequisites: z.array(z.string()).optional(),
-    category: z.enum(["Program", "Track", "Elective"]),
+    category: z.enum([
+      "Uni Req",
+      "School Req",
+      "Prog Req",
+      "Track Req",
+      "School Elective",
+      "Elective",
+      "Language",
+    ]),
   }),
 });
 
