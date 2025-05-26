@@ -6,7 +6,35 @@ import Card from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { PlusCircle, Calculator, Target } from "lucide-react";
 
-export function AddableGpaCalculators() {  const [calculators, setCalculators] = useState<number[]>([Date.now()]);
+// Utility function to clean up all GPA calculator localStorage data
+// This can be used for debugging or resetting the application state
+const cleanupAllGpaStorageData = () => {
+  try {
+    // Get all localStorage keys
+    const keys = Object.keys(localStorage);
+    
+    // Filter keys related to GPA calculators
+    const gpaKeys = keys.filter(key => 
+      key.startsWith("gpa_") || 
+      key === "hours_map" ||
+      key === "gpa_target_hours_passed" ||
+      key === "gpa_target_semester_hours" ||
+      key === "gpa_target_desired_gpa" ||
+      key === "gpa_target_required_gpa"
+    );
+    
+    // Remove all matching keys
+    gpaKeys.forEach(key => localStorage.removeItem(key));
+    
+    return true;
+  } catch (error) {
+    console.error("Error cleaning up localStorage data:", error);
+    return false;
+  }
+};
+
+export function AddableGpaCalculators() {
+  const [calculators, setCalculators] = useState<number[]>([Date.now()]);
   const [activeTab, setActiveTab] = useState<string>("gpa");
   // Track GPA for each calculator by id
   const [gpaMap, setGpaMap] = useState<Record<number, number | null>>({});
@@ -15,7 +43,8 @@ export function AddableGpaCalculators() {  const [calculators, setCalculators] =
 
   const addCalculator = () => {
     setCalculators((prev) => [...prev, Date.now()]);
-  };  const deleteCalculator = (id: number) => {
+  };
+  const deleteCalculator = (id: number) => {
     setCalculators((prev) =>
       prev.filter((calculatorId) => calculatorId !== id)
     );
@@ -29,9 +58,28 @@ export function AddableGpaCalculators() {  const [calculators, setCalculators] =
       delete copy[id];
       return copy;
     });
-    // Also clean up the courses data from localStorage
-    localStorage.removeItem(`gpa_courses_${id}`);
+    
+    try {
+      // Clean up the courses data from localStorage
+      localStorage.removeItem(`gpa_courses_${id}`);
+      
+      // Immediately update the localStorage to reflect the change
+      const remainingCalculators = calculators.filter(calculatorId => calculatorId !== id);
+      localStorage.setItem("gpa_calculators", JSON.stringify(remainingCalculators));
+      
+      // Also update GPA map and hours map in localStorage after deletion
+      const updatedGpaMap = { ...gpaMap };
+      delete updatedGpaMap[id];
+      localStorage.setItem("gpa_map", JSON.stringify(updatedGpaMap));
+      
+      const updatedHoursMap = { ...hoursMap };
+      delete updatedHoursMap[id];
+      localStorage.setItem("hours_map", JSON.stringify(updatedHoursMap));
+    } catch (error) {
+      console.error(`Error cleaning up localStorage for calculator ${id}:`, error);
+    }
   };
+
   // Calculate cumulative GPA (average of all non-null semester GPAs)
   const semesterGpas = calculators
     .map((id) => gpaMap[id])
@@ -45,11 +93,14 @@ export function AddableGpaCalculators() {  const [calculators, setCalculators] =
   const totalHours = calculators
     .map((id) => hoursMap[id] || 0)
     .reduce((sum, hours) => sum + hours, 0);
-  // Load calculators and gpaMap from localStorage on mount
+
+  // Load calculators, gpaMap, hoursMap, and activeTab from localStorage on mount
   useEffect(() => {
     const savedCalculators = localStorage.getItem("gpa_calculators");
     const savedGpaMap = localStorage.getItem("gpa_map");
     const savedHoursMap = localStorage.getItem("hours_map");
+    const savedActiveTab = localStorage.getItem("gpa_active_tab");
+    
     if (savedCalculators) {
       try {
         setCalculators(JSON.parse(savedCalculators));
@@ -65,21 +116,36 @@ export function AddableGpaCalculators() {  const [calculators, setCalculators] =
         setHoursMap(JSON.parse(savedHoursMap));
       } catch {}
     }
+    if (savedActiveTab) {
+      setActiveTab(savedActiveTab);
+    }
   }, []);
-  // Save calculators and gpaMap to localStorage on change
+  // Save calculators, gpaMap, hoursMap to localStorage on change
   useEffect(() => {
-    localStorage.setItem("gpa_calculators", JSON.stringify(calculators));
-    localStorage.setItem("gpa_map", JSON.stringify(gpaMap));
-    localStorage.setItem("hours_map", JSON.stringify(hoursMap));
+    try {
+      localStorage.setItem("gpa_calculators", JSON.stringify(calculators));
+      localStorage.setItem("gpa_map", JSON.stringify(gpaMap));
+      localStorage.setItem("hours_map", JSON.stringify(hoursMap));
+    } catch (error) {
+      console.error("Error saving calculator data to localStorage:", error);
+    }
   }, [calculators, gpaMap, hoursMap]);
+
+  // Save activeTab to localStorage when it changes
+  useEffect(() => {
+    try {
+      localStorage.setItem("gpa_active_tab", activeTab);
+    } catch (error) {
+      console.error("Error saving active tab to localStorage:", error);
+    }
+  }, [activeTab]);
 
   return (
     <div className="min-h-screen w-full">
-      <Tabs value={activeTab} onValueChange={setActiveTab} className="">
-        {" "}
+      <Tabs value={activeTab} onValueChange={setActiveTab} className="sticky">
         {/* Tab Navigation with Cumulative GPA */}
-        <div className="sticky top-15 index-60 ml-16 bg-white border-b border-gray-200 px-4 py-2">
-          <div className="max-w-7xl mx-auto flex items-center justify-between">
+        <div className="sticky top-15 z-60 bg-white border-b border-gray-200 py-2 px-4 mx-12">
+          <div className="max-w-7xl mx-auto flex items-center justify-between px-4">
             <TabsList className="grid w-fit grid-cols-2 h-8">
               <TabsTrigger
                 value="gpa"
@@ -97,7 +163,9 @@ export function AddableGpaCalculators() {  const [calculators, setCalculators] =
                 <span className="hidden sm:inline text-sm">Target GPA</span>
                 <span className="sm:hidden text-sm">Target</span>
               </TabsTrigger>
-            </TabsList>            {/* Cumulative GPA Card - Always visible */}
+            </TabsList>
+
+            {/* Cumulative GPA Card - Always visible */}
             <Card className="p-3 text-center min-w-[160px]">
               <h3 className="text-xs font-semibold text-gray-700">
                 Cumulative GPA
@@ -115,7 +183,8 @@ export function AddableGpaCalculators() {  const [calculators, setCalculators] =
               </p>
             </Card>
           </div>
-        </div>{" "}
+        </div>
+
         {/* Tab Content */}
         <div className="w-full ml-7 px-4 py-6 mt-10">
           <div className="w-full">
@@ -127,8 +196,11 @@ export function AddableGpaCalculators() {  const [calculators, setCalculators] =
                 <p className="text-gray-600">
                   Calculate your GPA for each semester
                 </p>
-              </div>              {/* Desktop: horizontal scroll, Mobile: vertical stack */}
-              <div className="hidden lg:block overflow-x-auto pb-4 w-full">                <div className="flex gap-6 min-w-max items-start ml-7">
+              </div>
+
+              {/* Desktop: horizontal scroll, Mobile: vertical stack */}
+              <div className="hidden lg:block overflow-x-auto pb-4 w-full">
+                <div className="flex gap-6 min-w-max items-start ml-7">
                   {calculators.map((id, idx) => (
                     <GpaCalculator
                       key={id}
@@ -155,7 +227,10 @@ export function AddableGpaCalculators() {  const [calculators, setCalculators] =
                     </Button>
                   </div>
                 </div>
-              </div>              {/* Mobile: vertical stack */}              <div className="lg:hidden flex flex-col gap-6 w-full max-w-xl mx-auto ml-7">
+              </div>
+
+              {/* Mobile: vertical stack */}
+              <div className="lg:hidden flex flex-col gap-6 w-full max-w-xl mx-auto ml-7">
                 {calculators.map((id, idx) => (
                   <GpaCalculator
                     key={id}

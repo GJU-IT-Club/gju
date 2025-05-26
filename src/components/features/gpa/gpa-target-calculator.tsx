@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Trash } from "lucide-react";
 
@@ -17,9 +17,35 @@ function GpaTargetCalculator({
   const [desiredGpa, setDesiredGpa] = useState(84);
   const [requiredGpa, setRequiredGpa] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
+  // Load target calculator state from localStorage on mount
+  useEffect(() => {
+    try {
+      const savedHoursPassed = localStorage.getItem("gpa_target_hours_passed");
+      const savedSemesterHours = localStorage.getItem("gpa_target_semester_hours");
+      const savedDesiredGpa = localStorage.getItem("gpa_target_desired_gpa");
+      const savedRequiredGpa = localStorage.getItem("gpa_target_required_gpa");
+      
+      if (savedHoursPassed) setHoursPassed(Number(savedHoursPassed));
+      if (savedSemesterHours) setSemesterHours(Number(savedSemesterHours));
+      if (savedDesiredGpa) setDesiredGpa(Number(savedDesiredGpa));
+      if (savedRequiredGpa) setRequiredGpa(Number(savedRequiredGpa));
+    } catch (error) {
+      console.error("Error loading target calculator state from localStorage:", error);
+    }
+  }, []);
+  // Save target calculator state to localStorage when values change
+  useEffect(() => {
+    try {
+      localStorage.setItem("gpa_target_hours_passed", hoursPassed.toString());
+      localStorage.setItem("gpa_target_semester_hours", semesterHours.toString());
+      localStorage.setItem("gpa_target_desired_gpa", desiredGpa.toString());
+    } catch (error) {
+      console.error("Error saving target calculator state to localStorage:", error);
+    }
+  }, [hoursPassed, semesterHours, desiredGpa]);
 
   // Update currentGpa when initialCurrentGpa changes
-  React.useEffect(() => {
+  useEffect(() => {
     if (initialCurrentGpa && initialCurrentGpa > 0) {
       setCurrentGpa(initialCurrentGpa);
     }
@@ -30,11 +56,14 @@ function GpaTargetCalculator({
     const hPassed = Number(hoursPassed);
     const cGpa = Number(currentGpa);
     const sHours = Number(semesterHours);
-    const dGpa = Number(desiredGpa);
-    
-    if (hPassed < 0 || sHours <= 0 || dGpa < 0 || cGpa < 0) {
+    const dGpa = Number(desiredGpa);    if (hPassed < 0 || sHours <= 0 || dGpa < 0 || cGpa < 0) {
       setError("All values must be positive and semester hours > 0.");
       setRequiredGpa(null);
+      try {
+        localStorage.removeItem("gpa_target_required_gpa");
+      } catch (error) {
+        console.error("Error removing required GPA from localStorage:", error);
+      }
       return;
     }
     
@@ -42,16 +71,34 @@ function GpaTargetCalculator({
     const totalPointsNeeded = dGpa * totalHours;
     const currentPoints = cGpa * hPassed;
     const neededSemesterPoints = totalPointsNeeded - currentPoints;
-    const reqGpa = neededSemesterPoints / sHours;
-    
-    if (reqGpa > 100) {
+    const reqGpa = neededSemesterPoints / sHours;      if (reqGpa > 100) {
       setError("Desired GPA is not achievable with the given inputs.");
       setRequiredGpa(null);
+      try {
+        localStorage.removeItem("gpa_target_required_gpa");
+      } catch (error) {
+        console.error("Error removing required GPA from localStorage:", error);
+      }
       return;
     }
-    
-    setRequiredGpa(reqGpa);
+      setRequiredGpa(reqGpa);    // Save the calculation result to localStorage
+    try {
+      localStorage.setItem("gpa_target_required_gpa", reqGpa.toString());
+    } catch (error) {
+      console.error("Error saving required GPA to localStorage:", error);
+    }
   };
+  // Load required GPA result from localStorage on mount
+  useEffect(() => {
+    try {
+      const savedRequiredGpa = localStorage.getItem("gpa_target_required_gpa");
+      if (savedRequiredGpa) {
+        setRequiredGpa(Number(savedRequiredGpa));
+      }
+    } catch (error) {
+      console.error("Error loading required GPA from localStorage:", error);
+    }
+  }, []);
 
   return (
     <div className="relative rounded-xl border bg-white shadow-lg p-6 space-y-4 w-full max-w-[500px] min-w-[350px]">

@@ -29,18 +29,23 @@ function GpaCalculator({ id, semesterName, onDelete, showDelete, onGpaChange, on
   const [courses, setCourses] = useState<Course[]>([
     { name: "", credit: 3, percentage: 85 },
   ]);
-
   // Load courses from localStorage on mount
   useEffect(() => {
     if (id) {
-      const savedCourses = localStorage.getItem(`gpa_courses_${id}`);
-      if (savedCourses) {
-        try {
-          const parsedCourses = JSON.parse(savedCourses);
-          if (Array.isArray(parsedCourses) && parsedCourses.length > 0) {
-            setCourses(parsedCourses);
+      try {
+        const savedCourses = localStorage.getItem(`gpa_courses_${id}`);
+        if (savedCourses) {
+          try {
+            const parsedCourses = JSON.parse(savedCourses);
+            if (Array.isArray(parsedCourses) && parsedCourses.length > 0) {
+              setCourses(parsedCourses);
+            }
+          } catch (error) {
+            console.error(`Error parsing courses for calculator ${id}:`, error);
           }
-        } catch {}
+        }
+      } catch (error) {
+        console.error(`Error loading courses from localStorage for calculator ${id}:`, error);
       }
     }
   }, [id]);
@@ -48,7 +53,11 @@ function GpaCalculator({ id, semesterName, onDelete, showDelete, onGpaChange, on
   // Save courses to localStorage when courses change
   useEffect(() => {
     if (id) {
-      localStorage.setItem(`gpa_courses_${id}`, JSON.stringify(courses));
+      try {
+        localStorage.setItem(`gpa_courses_${id}`, JSON.stringify(courses));
+      } catch (error) {
+        console.error(`Error saving courses to localStorage for calculator ${id}:`, error);
+      }
     }
   }, [courses, id]);
   useEffect(() => {
