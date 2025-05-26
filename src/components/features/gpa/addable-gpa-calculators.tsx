@@ -40,41 +40,65 @@ export function AddableGpaCalculators() {
   const [gpaMap, setGpaMap] = useState<Record<number, number | null>>({});
   // Track total hours for each calculator by id
   const [hoursMap, setHoursMap] = useState<Record<number, number>>({});
-
-  const addCalculator = () => {
-    setCalculators((prev) => [...prev, Date.now()]);
+  
+  // Helper function to update GPA map and save to localStorage
+  const updateGpaMap = (id: number, gpa: number | null) => {
+    setGpaMap(prev => {
+      const updatedGpaMap = { ...prev, [id]: gpa };
+      try {
+        localStorage.setItem("gpa_map", JSON.stringify(updatedGpaMap));
+      } catch (error) {
+        console.error("Error updating GPA map in localStorage:", error);
+      }
+      return updatedGpaMap;
+    });
   };
-  const deleteCalculator = (id: number) => {
-    setCalculators((prev) =>
-      prev.filter((calculatorId) => calculatorId !== id)
-    );
-    setGpaMap((prev) => {
-      const copy = { ...prev };
-      delete copy[id];
-      return copy;
+  
+  // Helper function to update Hours map and save to localStorage
+  const updateHoursMap = (id: number, hours: number) => {
+    setHoursMap(prev => {
+      const updatedHoursMap = { ...prev, [id]: hours };
+      try {
+        localStorage.setItem("hours_map", JSON.stringify(updatedHoursMap));
+      } catch (error) {
+        console.error("Error updating hours map in localStorage:", error);
+      }
+      return updatedHoursMap;
     });
-    setHoursMap((prev) => {
-      const copy = { ...prev };
-      delete copy[id];
-      return copy;
+  };
+  const addCalculator = () => {
+    const newCalculatorId = Date.now();
+    setCalculators((prev) => {
+      const updatedCalculators = [...prev, newCalculatorId];
+      // Immediately update localStorage to prevent loss on refresh
+      try {
+        localStorage.setItem("gpa_calculators", JSON.stringify(updatedCalculators));
+      } catch (error) {
+        console.error("Error updating calculators in localStorage:", error);
+      }
+      return updatedCalculators;
     });
-    
+  };  const deleteCalculator = (id: number) => {
     try {
-      // Clean up the courses data from localStorage
+      // First remove from localStorage before updating state to prevent refresh issues
       localStorage.removeItem(`gpa_courses_${id}`);
       
-      // Immediately update the localStorage to reflect the change
       const remainingCalculators = calculators.filter(calculatorId => calculatorId !== id);
-      localStorage.setItem("gpa_calculators", JSON.stringify(remainingCalculators));
-      
-      // Also update GPA map and hours map in localStorage after deletion
       const updatedGpaMap = { ...gpaMap };
-      delete updatedGpaMap[id];
-      localStorage.setItem("gpa_map", JSON.stringify(updatedGpaMap));
-      
       const updatedHoursMap = { ...hoursMap };
+      
+      delete updatedGpaMap[id];
       delete updatedHoursMap[id];
+      
+      // Update localStorage first to ensure data consistency if page refreshes
+      localStorage.setItem("gpa_calculators", JSON.stringify(remainingCalculators));
+      localStorage.setItem("gpa_map", JSON.stringify(updatedGpaMap));
       localStorage.setItem("hours_map", JSON.stringify(updatedHoursMap));
+      
+      // Now update the state
+      setCalculators(remainingCalculators);
+      setGpaMap(updatedGpaMap);
+      setHoursMap(updatedHoursMap);
     } catch (error) {
       console.error(`Error cleaning up localStorage for calculator ${id}:`, error);
     }
@@ -100,21 +124,48 @@ export function AddableGpaCalculators() {
     const savedGpaMap = localStorage.getItem("gpa_map");
     const savedHoursMap = localStorage.getItem("hours_map");
     const savedActiveTab = localStorage.getItem("gpa_active_tab");
-    
-    if (savedCalculators) {
+      if (savedCalculators) {
       try {
-        setCalculators(JSON.parse(savedCalculators));
-      } catch {}
+        const parsedCalculators = JSON.parse(savedCalculators);
+        if (Array.isArray(parsedCalculators) && parsedCalculators.length > 0) {
+          setCalculators(parsedCalculators);
+        } else {
+          // Fallback to default if saved data is invalid
+          setCalculators([Date.now()]);
+          console.warn("Invalid calculators data in localStorage, using default");
+        }
+      } catch (error) {
+        console.error("Error parsing calculators from localStorage:", error);
+        setCalculators([Date.now()]); // Fallback to default
+      }
     }
     if (savedGpaMap) {
       try {
-        setGpaMap(JSON.parse(savedGpaMap));
-      } catch {}
+        const parsedGpaMap = JSON.parse(savedGpaMap);
+        if (parsedGpaMap && typeof parsedGpaMap === 'object') {
+          setGpaMap(parsedGpaMap);
+        } else {
+          setGpaMap({}); // Fallback to default
+          console.warn("Invalid GPA map data in localStorage, using default");
+        }
+      } catch (error) {
+        console.error("Error parsing GPA map from localStorage:", error);
+        setGpaMap({}); // Fallback to default
+      }
     }
     if (savedHoursMap) {
       try {
-        setHoursMap(JSON.parse(savedHoursMap));
-      } catch {}
+        const parsedHoursMap = JSON.parse(savedHoursMap);
+        if (parsedHoursMap && typeof parsedHoursMap === 'object') {
+          setHoursMap(parsedHoursMap);
+        } else {
+          setHoursMap({}); // Fallback to default
+          console.warn("Invalid hours map data in localStorage, using default");
+        }
+      } catch (error) {
+        console.error("Error parsing hours map from localStorage:", error);
+        setHoursMap({}); // Fallback to default
+      }
     }
     if (savedActiveTab) {
       setActiveTab(savedActiveTab);
@@ -208,12 +259,8 @@ export function AddableGpaCalculators() {
                       semesterName={`Semester ${idx + 1}`}
                       onDelete={() => deleteCalculator(id)}
                       showDelete={calculators.length > 1}
-                      onGpaChange={(gpa) =>
-                        setGpaMap((prev) => ({ ...prev, [id]: gpa }))
-                      }
-                      onHoursChange={(hours) =>
-                        setHoursMap((prev) => ({ ...prev, [id]: hours }))
-                      }
+                      onGpaChange={(gpa) => updateGpaMap(id, gpa)}
+                      onHoursChange={(hours) => updateHoursMap(id, hours)}
                     />
                   ))}
                   {/* Add Calculator Button */}
@@ -238,12 +285,8 @@ export function AddableGpaCalculators() {
                     semesterName={`Semester ${idx + 1}`}
                     onDelete={() => deleteCalculator(id)}
                     showDelete={calculators.length > 1}
-                    onGpaChange={(gpa) =>
-                      setGpaMap((prev) => ({ ...prev, [id]: gpa }))
-                    }
-                    onHoursChange={(hours) =>
-                      setHoursMap((prev) => ({ ...prev, [id]: hours }))
-                    }
+                    onGpaChange={(gpa) => updateGpaMap(id, gpa)}
+                    onHoursChange={(hours) => updateHoursMap(id, hours)}
                   />
                 ))}
                 <Button
