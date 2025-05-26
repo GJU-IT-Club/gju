@@ -2,13 +2,28 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Trash } from "lucide-react";
 
-function GpaTargetCalculator({ onDelete, showDelete }: { onDelete?: () => void; showDelete?: boolean }) {
-  const [currentGpa, setCurrentGpa] = useState(80);
+function GpaTargetCalculator({ 
+  onDelete, 
+  showDelete, 
+  currentGpa: initialCurrentGpa 
+}: { 
+  onDelete?: () => void; 
+  showDelete?: boolean;
+  currentGpa?: number;
+}) {
+  const [currentGpa, setCurrentGpa] = useState(initialCurrentGpa || 80);
   const [hoursPassed, setHoursPassed] = useState(90);
   const [semesterHours, setSemesterHours] = useState(15);
   const [desiredGpa, setDesiredGpa] = useState(84);
   const [requiredGpa, setRequiredGpa] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
+
+  // Update currentGpa when initialCurrentGpa changes
+  React.useEffect(() => {
+    if (initialCurrentGpa && initialCurrentGpa > 0) {
+      setCurrentGpa(initialCurrentGpa);
+    }
+  }, [initialCurrentGpa]);
 
   const calculateRequiredGpa = () => {
     setError(null);

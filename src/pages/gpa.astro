@@ -1,12 +1,11 @@
 ---
 import MainLayout from "@/layouts/MainLayout.astro";
-import { AddableGpaCalculators } from "@/components/ui/addable-gpa-calculators";
 import TabBar from "@/components/ui/tab-bar";
+import { AddableGpaCalculators } from "@/components/features/gpa/addable-gpa-calculators";
 ---
 
-<MainLayout title="Astro Page" description="A simple Astro page example">
-  
- 
+<MainLayout title="Settings" description="gju.app settings page">
+  <main class="min-h-screen w-full flex flex-col p-0">
     <AddableGpaCalculators client:load />
-  
+  </main>
 </MainLayout>

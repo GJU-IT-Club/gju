@@ -17,16 +17,39 @@ function getRating(gpaPercentage: number): string {
 }
 
 interface GpaCalculatorProps {
+  id?: number;
   semesterName?: string;
   onDelete?: () => void;
   showDelete: boolean;
   onGpaChange?: (gpa: number | null) => void;
 }
 
-function GpaCalculator({ semesterName, onDelete, showDelete, onGpaChange }: GpaCalculatorProps) {
+function GpaCalculator({ id, semesterName, onDelete, showDelete, onGpaChange }: GpaCalculatorProps) {
   const [courses, setCourses] = useState<Course[]>([
     { name: "", credit: 3, percentage: 85 },
   ]);
+
+  // Load courses from localStorage on mount
+  useEffect(() => {
+    if (id) {
+      const savedCourses = localStorage.getItem(`gpa_courses_${id}`);
+      if (savedCourses) {
+        try {
+          const parsedCourses = JSON.parse(savedCourses);
+          if (Array.isArray(parsedCourses) && parsedCourses.length > 0) {
+            setCourses(parsedCourses);
+          }
+        } catch {}
+      }
+    }
+  }, [id]);
+
+  // Save courses to localStorage when courses change
+  useEffect(() => {
+    if (id) {
+      localStorage.setItem(`gpa_courses_${id}`, JSON.stringify(courses));
+    }
+  }, [courses, id]);
 
   useEffect(() => {
     const gpa = calculateGpaPercentage();
