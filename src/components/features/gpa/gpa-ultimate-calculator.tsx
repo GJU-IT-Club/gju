@@ -1,9 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Button } from "./button";
-import { Card } from "./card";
-import { Input } from "./input";
-import { Label } from "./label";
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "./sheet";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import { PlusCircle, Trash2, Calculator } from "lucide-react";
 
 // GPA grade categories
