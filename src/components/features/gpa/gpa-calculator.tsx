@@ -22,9 +22,10 @@ interface GpaCalculatorProps {
   onDelete?: () => void;
   showDelete: boolean;
   onGpaChange?: (gpa: number | null) => void;
+  onHoursChange?: (hours: number) => void;
 }
 
-function GpaCalculator({ id, semesterName, onDelete, showDelete, onGpaChange }: GpaCalculatorProps) {
+function GpaCalculator({ id, semesterName, onDelete, showDelete, onGpaChange, onHoursChange }: GpaCalculatorProps) {
   const [courses, setCourses] = useState<Course[]>([
     { name: "", credit: 3, percentage: 85 },
   ]);
@@ -50,10 +51,11 @@ function GpaCalculator({ id, semesterName, onDelete, showDelete, onGpaChange }: 
       localStorage.setItem(`gpa_courses_${id}`, JSON.stringify(courses));
     }
   }, [courses, id]);
-
   useEffect(() => {
     const gpa = calculateGpaPercentage();
+    const totalHours = calculateTotalHours();
     if (onGpaChange) onGpaChange(isNaN(gpa) ? null : gpa);
+    if (onHoursChange) onHoursChange(totalHours);
     // eslint-disable-next-line
   }, [courses]);
 
@@ -78,7 +80,6 @@ function GpaCalculator({ id, semesterName, onDelete, showDelete, onGpaChange }: 
     const updated = courses.filter((_, i) => i !== index);
     setCourses(updated);
   };
-
   const calculateGpaPercentage = (): number => {
     const totalWeighted = courses.reduce(
       (sum, course) => sum + course.percentage * course.credit,
@@ -91,7 +92,12 @@ function GpaCalculator({ id, semesterName, onDelete, showDelete, onGpaChange }: 
     return totalCredits ? totalWeighted / totalCredits : 0;
   };
 
+  const calculateTotalHours = (): number => {
+    return courses.reduce((sum, course) => sum + course.credit, 0);
+  };
+
   const gpaPercentage = calculateGpaPercentage().toFixed(2);
+  const totalHours = calculateTotalHours();
   const rating = getRating(Number(gpaPercentage));
 
   return (
@@ -160,13 +166,15 @@ function GpaCalculator({ id, semesterName, onDelete, showDelete, onGpaChange }: 
       </div>
       <Button onClick={addCourse} className="w-full mt-4">
         Add Course
-      </Button>
-      <div className="mt-6 p-4 bg-gray-50 rounded-lg text-center">
+      </Button>      <div className="mt-6 p-4 bg-gray-50 rounded-lg text-center">
         <div className="text-lg font-semibold">
           GPA (%): <span className="text-blue-600">{gpaPercentage}</span>
         </div>
         <div className="text-lg font-semibold mt-1">
           Rating: <span className="text-green-600">{rating}</span>
+        </div>
+        <div className="text-sm font-medium mt-2 text-gray-600">
+          Total Hours: <span className="text-gray-800">{totalHours}</span>
         </div>
       </div>
     </div>
