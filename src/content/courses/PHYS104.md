@@ -1,13 +1,13 @@
 ---
-id: CS116
-name: Computing Fundamentals
+id: PHYS104
+name: Physics II
 creditHours: 3
-prerequisites: []
+prerequisites: [PHYS103]
 corequisites: []
 category: School Req
 ---
 
-# Computing Fundamentals
+# Physics II
 
 ## Course Description
 <Description>

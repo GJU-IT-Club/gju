@@ -1,13 +1,13 @@
 ---
-id: CS116
-name: Computing Fundamentals
+id: PHYS103
+name: Physics I
 creditHours: 3
 prerequisites: []
 corequisites: []
 category: School Req
 ---
 
-# Computing Fundamentals
+# Physics I
 
 ## Course Description
 <Description>

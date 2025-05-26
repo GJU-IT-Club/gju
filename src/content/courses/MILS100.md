@@ -1,13 +1,13 @@
 ---
-id: CS116
-name: Computing Fundamentals
+id: MILS100
+name: Military Science
 creditHours: 3
 prerequisites: []
 corequisites: []
-category: School Req
+category: Uni Req
 ---
 
-# Computing Fundamentals
+# Military Science
 
 ## Course Description
 <Description>

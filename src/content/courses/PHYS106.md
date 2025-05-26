@@ -1,13 +1,13 @@
 ---
-id: CS116
-name: Computing Fundamentals
-creditHours: 3
+id: PHYS106
+name: Physics Lab
+creditHours: 1
 prerequisites: []
-corequisites: []
+corequisites: [PHYS104]
 category: School Req
 ---
 
-# Computing Fundamentals
+# Physics Lab
 
 ## Course Description
 <Description>

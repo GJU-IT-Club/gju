@@ -1,13 +1,13 @@
 ---
-id: CS116
-name: Computing Fundamentals
+id: PREL4
+name: Program Elective IV
 creditHours: 3
 prerequisites: []
 corequisites: []
-category: School Req
+category: Track Req
 ---
 
-# Computing Fundamentals
+# Program Elective IV
 
 ## Course Description
 <Description>

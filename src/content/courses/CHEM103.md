@@ -1,13 +1,13 @@
 ---
-id: CS116
-name: Computing Fundamentals
+id: CHEM103
+name: General Chemistry
 creditHours: 3
 prerequisites: []
 corequisites: []
 category: School Req
 ---
 
-# Computing Fundamentals
+# General Chemistry
 
 ## Course Description
 <Description>

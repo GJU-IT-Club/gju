@@ -1,13 +1,13 @@
 ---
-id: CS116
-name: Computing Fundamentals
+id: MATH101
+name: Calculus I
 creditHours: 3
 prerequisites: []
 corequisites: []
 category: School Req
 ---
 
-# Computing Fundamentals
+# Calculus I
 
 ## Course Description
 <Description>

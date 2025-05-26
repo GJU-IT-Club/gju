@@ -19,7 +19,7 @@ interface PlansViewProps {
 
 const PlansView: React.FC<PlansViewProps> = ({ roadmaps, courses }) => {
   const [selectedRoadmapId, setSelectedRoadmapId] = useState<string>(
-    "cs-general-2022-2023"
+    "cs-general-2023-2024"
   );
   const [searchTerm, setSearchTerm] = useState<string>("");
 

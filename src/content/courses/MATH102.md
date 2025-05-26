@@ -1,13 +1,13 @@
 ---
-id: CS116
-name: Computing Fundamentals
+id: MATH102
+name: Calculus II
 creditHours: 3
-prerequisites: []
+prerequisites: [MATH101]
 corequisites: []
 category: School Req
 ---
 
-# Computing Fundamentals
+# Calculus II
 
 ## Course Description
 <Description>

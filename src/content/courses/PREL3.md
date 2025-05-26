@@ -1,13 +1,13 @@
 ---
-id: CS116
-name: Computing Fundamentals
+id: PREL3
+name: Program Elective III
 creditHours: 3
 prerequisites: []
 corequisites: []
-category: School Req
+category: Track Req
 ---
 
-# Computing Fundamentals
+# Program Elective III
 
 ## Course Description
 <Description>
