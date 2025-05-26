@@ -40,7 +40,7 @@
       "id": "CS1170",
       "name": "Object-Oriented Programming Lab",
       "creditHours": 1,
-      "prerequisites": ["CS116", "CS1160"],
+      "prerequisites": [],
       "corequisites": ["CS117"],
       "category": "Prog Req",
       "year": 1
@@ -148,7 +148,7 @@
       "id": "CE2120",
       "name": "Digital Systems Lab",
       "creditHours": 1,
-      "prerequisites": ["CS116"],
+      "prerequisites": [""],
       "corequisites": ["CE212"],
       "category": "School Req",
       "year": 2
