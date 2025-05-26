@@ -35,7 +35,7 @@ const PlansFlow: React.FC<PlansFlowProps> = ({ roadmap, courses }) => {
 
       nodes.push({
         id: courseId,
-        position: { x: 0, y: 0 }, // Will be set by ELK layout
+        position: { x: 0, y: 0 }, // Will be set by ELK
         type: "courseNode",
         data: {
           id: courseId,
@@ -110,6 +110,7 @@ const PlansFlow: React.FC<PlansFlowProps> = ({ roadmap, courses }) => {
             algorithm: "layered",
             nodeSpacing: 80,
             layerSpacing: 150,
+            smallComponentLayout: "vertical", // TODO: try changing to "vertical" to test whole roadmps
           });
 
         setNodes(layoutedNodes);
@@ -135,7 +136,6 @@ const PlansFlow: React.FC<PlansFlowProps> = ({ roadmap, courses }) => {
     courseNode: CourseNode,
   };
 
-  // Loading state overlay
   if (isLayouting) {
     return (
       <div
@@ -149,8 +149,10 @@ const PlansFlow: React.FC<PlansFlowProps> = ({ roadmap, courses }) => {
         }}
       >
         <div className="flex flex-col items-center gap-4">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
-          <p className="text-sm text-gray-600">Organizing course layout...</p>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+          <p className="text-sm text-primary-foreground">
+            Organizing course layout...
+          </p>
         </div>
       </div>
     );
@@ -172,13 +174,22 @@ const PlansFlow: React.FC<PlansFlowProps> = ({ roadmap, courses }) => {
         nodeTypes={nodeTypes}
         fitView
         nodesDraggable={true}
-        nodesConnectable={false} // Disable connecting as per requirements
-        elementsSelectable={true} // Keep selection for clicking
-        panOnDrag={true} // Allow panning
-        zoomOnDoubleClick={true} // Allow zoom on double click
-        zoomOnScroll={true} // Allow zoom on scroll
+        nodesConnectable={false}
+        elementsSelectable={true}
+        panOnDrag={true}
+        zoomOnDoubleClick={true}
+        zoomOnScroll={true}
       >
         <Controls />
+        <MiniMap
+          // nodeColor={(node) => {
+          //   const course = courses[node.id];
+          //   return course ? course.category : "#eee";
+          // }}
+          nodeStrokeWidth={2}
+          zoomable={false}
+          pannable={false}
+        />
         <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
       </ReactFlow>
     </div>

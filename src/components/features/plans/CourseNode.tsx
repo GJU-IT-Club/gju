@@ -73,7 +73,7 @@ function CourseNode({ data }: NodeProps<CourseNode>) {
         <div className="text-sm">{data.name}</div>
         <button
           onClick={(e) => {
-            e.stopPropagation(); // Prevent node click event
+            e.stopPropagation(); 
             setShowDetails(!showDetails);
           }}
           className="text-xs mt-2 text-blue-600 hover:underline"
