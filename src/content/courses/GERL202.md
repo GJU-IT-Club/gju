@@ -1,13 +1,13 @@
 ---
-id: CS116
-name: Computing Fundamentals
+id: GERL202
+name: German IV
 creditHours: 3
-prerequisites: []
+prerequisites: [GERL201]
 corequisites: []
-category: School Req
+category: Language
 ---
 
-# Computing Fundamentals
+# German IV
 
 ## Course Description
 <Description>

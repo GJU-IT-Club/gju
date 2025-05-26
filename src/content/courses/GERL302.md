@@ -1,13 +1,13 @@
 ---
-id: CS116
-name: Computing Fundamentals
+id: GERL302
+name: German VI
 creditHours: 3
-prerequisites: []
+prerequisites: [GERL301]
 corequisites: []
-category: School Req
+category: Language
 ---
 
-# Computing Fundamentals
+# German VI
 
 ## Course Description
 <Description>

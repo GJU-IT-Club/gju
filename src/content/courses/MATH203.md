@@ -1,13 +1,13 @@
 ---
-id: CS116
-name: Computing Fundamentals
+id: MATH203
+name: Applied Mathematics for Engineers
 creditHours: 3
-prerequisites: []
+prerequisites: [MATH102]
 corequisites: []
 category: School Req
 ---
 
-# Computing Fundamentals
+# Applied Mathematics for Engineers
 
 ## Course Description
 <Description>

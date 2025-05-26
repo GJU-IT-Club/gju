@@ -1,13 +1,13 @@
 ---
-id: CS116
-name: Computing Fundamentals
+id: MATH205
+name: Differential Equations
 creditHours: 3
-prerequisites: []
+prerequisites: [MATH102]
 corequisites: []
 category: School Req
 ---
 
-# Computing Fundamentals
+# Differential Equations
 
 ## Course Description
 <Description>

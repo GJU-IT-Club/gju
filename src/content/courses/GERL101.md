@@ -1,13 +1,13 @@
 ---
-id: CS116
-name: Computing Fundamentals
+id: GERL101
+name: German I
 creditHours: 3
 prerequisites: []
 corequisites: []
-category: School Req
+category: Language
 ---
 
-# Computing Fundamentals
+# German I
 
 ## Course Description
 <Description>
