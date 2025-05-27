@@ -11,7 +11,6 @@ export interface ElkLayoutOptions {
   layerSpacing: number;
   algorithm: string;
   alignment: string;
-  smallComponentLayout: "vertical" | "grid";
   corequisiteLayout: "subgraph" | "adjacent";
 }
 
@@ -21,7 +20,6 @@ const defaultOptions: ElkLayoutOptions = {
   layerSpacing: 100,
   algorithm: "layered",
   alignment: "CENTER",
-  smallComponentLayout: "vertical",
   corequisiteLayout: "adjacent",
 };
 
@@ -483,7 +481,6 @@ export const getLayoutedElements = async (
       size: graph.children?.length || 0,
     }))
     .sort((a, b) => b.size - a.size);
-
   const layoutedNodes: Node[] = [];
   let rightSideX = 0;
   let mainComponentMaxX = 0;
@@ -512,27 +509,14 @@ export const getLayoutedElements = async (
         rightSideX = mainComponentMaxX + 300; // 300px gap from main component
       }
 
-      if (opts.smallComponentLayout === "grid" && componentIndex > 1) {
-        const gridColumns = 2;
-        const columnIndex = Math.floor((componentIndex - 1) / gridColumns);
-        const rowIndex = (componentIndex - 1) % gridColumns;
+      // Always use grid layout for smaller components to keep them compact and near the top
+      const gridColumns = 2;
+      const smallComponentIndex = componentIndex - 1; // Adjust index for smaller components
+      const columnIndex = Math.floor(smallComponentIndex / gridColumns);
+      const rowIndex = smallComponentIndex % gridColumns;
 
-        baseX = rightSideX + columnIndex * 400; // 400px between columns
-        baseY = 100 + rowIndex * 400; // 400px between rows
-      } else {
-        baseX = rightSideX;
-        baseY = currentRightSideY;
-
-        let componentMaxY = 0;
-        graph.children?.forEach((child) => {
-          if (child.y !== undefined) {
-            componentMaxY = Math.max(componentMaxY, child.y + 120);
-          }
-        });
-
-        // spacing min 200px
-        currentRightSideY = baseY + Math.max(componentMaxY, 200) + 100;
-      }
+      baseX = rightSideX + columnIndex * 400; // 400px between columns
+      baseY = 100 + rowIndex * 300; // Reduced spacing between rows to keep components more compact
     }
     graph.children?.forEach((child) => {
       if (child.children) {
