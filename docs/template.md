@@ -85,12 +85,6 @@ Replace `<Description>` with a comprehensive course description including:
 ## Course Description
 This course introduces the concepts of object-oriented programming (OOP) using Java. Students will learn to design and implement classes, understand inheritance and polymorphism, and develop applications using OOP principles. The course includes both theoretical concepts and practical programming exercises.
 
-### Learning Objectives
-- Understand fundamental OOP concepts (encapsulation, inheritance, polymorphism)
-- Design and implement classes and objects in Java
-- Apply inheritance hierarchies and polymorphic behavior
-- Develop GUI applications using JavaFX
-- Debug and test object-oriented programs
 ```
 
 ### 2. Course Content Sections
