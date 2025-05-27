@@ -1,26 +1,76 @@
 ---
 import MainLayout from "@/layouts/MainLayout.astro";
+
 const props = {
-  title: "gju.app",
-  description: "gju.app home page",
+  title: "gju.app - Your Academic Companion",
+  description:
+    "Discover your academic journey with our comprehensive study tools, GPA calculator, course finder, and personalized study plans.",
 };
 ---
 
 <MainLayout {...props}>
-  <main class="min-h-screen flex flex-col items-center justify-center p-4">
-    <h1 class="text-2xl font-medium">
-      Welcome to <span
-        class="font-bold bg-gradient-to-r from-blue-600 via-yellow-500 to-amber-400 text-transparent bg-clip-text"
-        >gju.app</span
-      >!
-    </h1>
-    <p>
-      This is a simple example of an Astro page. You can use this template to
-      get started with your own project.
-    </p>
-    <p>
-      To learn more about Astro, check out the
-      <a href="https://docs.astro.build">Astro documentation</a>.
-    </p>
+  <main class="min-h-screen flex flex-col items-center justify-center p-8">
+    <div class="max-w-2xl mx-auto text-center">
+      <h1 class="text-4xl font-bold mb-4">
+        Welcome to <span
+          class="bg-gradient-to-r from-blue-600 via-purple-600 to-emerald-600 text-transparent bg-clip-text"
+          >gju.app</span
+        >
+      </h1>
+
+      <p class="text-lg text-gray-600 mb-8">
+        Your comprehensive academic companion designed to streamline your
+        educational journey with powerful tools and personalized insights.
+      </p>
+      <div class="space-y-4">
+        <h2 class="text-xl font-semibold text-gray-800 mb-6">
+          Available Features:
+        </h2>
+        <div class="grid grid-cols-2 gap-6 max-w-lg mx-auto">
+          <div class="text-left">
+            <a
+              href="/plans"
+              class="text-blue-600 hover:text-blue-800 hover:underline font-medium block mb-1"
+            >
+              Study Plans
+            </a>
+            <p class="text-sm text-gray-600">
+              Create and manage personalized study roadmaps
+            </p>
+          </div>
+          <div class="text-left">
+            <a
+              href="/find"
+              class="text-blue-600 hover:text-blue-800 hover:underline font-medium block mb-1"
+            >
+              Course Finder
+            </a>
+            <p class="text-sm text-gray-600">
+              Discover courses and academic pathways
+            </p>
+          </div>
+          <div class="text-left">
+            <a
+              href="/gpa"
+              class="text-blue-600 hover:text-blue-800 hover:underline font-medium block mb-1"
+            >
+              GPA Calculator
+            </a>
+            <p class="text-sm text-gray-600">Track your academic performance</p>
+          </div>
+          <div class="text-left">
+            <a
+              href="/settings"
+              class="text-blue-600 hover:text-blue-800 hover:underline font-medium block mb-1"
+            >
+              Settings
+            </a>
+            <p class="text-sm text-gray-600">
+              Customize your experience and profile
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
   </main>
 </MainLayout>
