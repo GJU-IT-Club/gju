@@ -110,7 +110,6 @@ const PlansFlow: React.FC<PlansFlowProps> = ({ roadmap, courses }) => {
             algorithm: "layered",
             nodeSpacing: 80,
             layerSpacing: 150,
-            smallComponentLayout: "vertical", // TODO: try changing to "vertical" to test whole roadmps
           });
 
         setNodes(layoutedNodes);
